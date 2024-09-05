@@ -10,7 +10,7 @@ public class RoomGenerator : MonoBehaviour
 
     void Start()
     {
-        CreateWalls();
+        CreateRoom();
     }
 
     void Update()
@@ -19,12 +19,12 @@ public class RoomGenerator : MonoBehaviour
         if (roomSize != previousRoomSize)
         {
             // Recreate walls based on the updated size
-            UpdateWalls();
+            UpdateRoom();
             previousRoomSize = roomSize; // Update previous size to the current
         }
     }
 
-    void CreateWalls()
+    void CreateRoom()
     {
         // Clear existing walls if any
         foreach (Transform child in transform)
@@ -44,33 +44,51 @@ public class RoomGenerator : MonoBehaviour
         Vector3 prefabScale = wallPrefab.transform.localScale; // Get the scale of the prefab
 
         // Adjust mesh size according to the prefab's local scale
-        Vector3 scaledMeshSize = Vector3.Scale(meshSize, prefabScale); 
+        Vector3 scaledMeshSize = Vector3.Scale(meshSize, prefabScale);
 
-        int wallCount = Mathf.Max(1, (int)(roomSize.x / scaledMeshSize.x));
-        float scale = (roomSize.x / wallCount) / scaledMeshSize.x; // Calculate scaling factor
+        // Create front wall (aligned along +z axis)
+        CreateWall(new Vector3(0, 0, roomSize.y / 2 - scaledMeshSize.z / 2), Vector3.right, scaledMeshSize, prefabScale, roomSize.x);
+
+        // Create back wall (aligned along -z axis)
+        CreateWall(new Vector3(0, 0, -roomSize.y / 2 + scaledMeshSize.z / 2), Vector3.right, scaledMeshSize, prefabScale, roomSize.x);
+
+        // Create left wall (aligned along -x axis, rotated 90 degrees)
+        CreateWall(new Vector3(-roomSize.x / 2 + scaledMeshSize.z / 2, 0, 0), Vector3.forward, scaledMeshSize, prefabScale, roomSize.y, true);
+
+        // Create right wall (aligned along +x axis, rotated 90 degrees)
+        CreateWall(new Vector3(roomSize.x / 2 - scaledMeshSize.z / 2, 0, 0), Vector3.forward, scaledMeshSize, prefabScale, roomSize.y, true);
+    }
+
+    void CreateWall(Vector3 basePosition, Vector3 direction, Vector3 scaledMeshSize, Vector3 prefabScale, float length, bool rotate = false)
+    {
+        int wallCount = Mathf.Max(1, (int)(length / scaledMeshSize.x));
+        float scale = (length / wallCount) / scaledMeshSize.x; // Calculate scaling factor
 
         for (int i = 0; i < wallCount; i++)
         {
             // Calculate the position for each wall module
-            Vector3 position = transform.position + new Vector3(
-                -roomSize.x / 2 + scaledMeshSize.x * scale / 2 + i * scale * scaledMeshSize.x, 
-                0, 
-                -roomSize.y / 2);
+            Vector3 position = basePosition + direction * (-length / 2 + scaledMeshSize.x * scale / 2 + i * scale * scaledMeshSize.x);
 
             // Instantiate the wall prefab at the calculated position with scaling
             GameObject wall = Instantiate(wallPrefab, position, Quaternion.identity, transform);
 
-            // Apply scaling to the wall module, combining prefab scale and dynamic scale
+            // Rotate the wall if needed (for left and right walls)
+            if (rotate)
+            {
+                wall.transform.rotation = Quaternion.Euler(0, 90, 0);
+            }
+
+            // Apply scaling to the wall module
             wall.transform.localScale = new Vector3(scale * prefabScale.x, prefabScale.y, prefabScale.z);
 
             // Log the position, size, and scale to debug
-            Debug.Log($"Wall Position: {position}, Scaled Mesh Size: {scaledMeshSize}, Scale: {scale}");
+            Debug.Log($"Wall Position: {position}, Scaled Mesh Size: {scaledMeshSize}, Scale: {scale}, Rotated: {rotate}");
         }
     }
 
-    void UpdateWalls()
+    void UpdateRoom()
     {
-        // Recreate walls to reflect new room size
-        CreateWalls();
+        // Recreate the room to reflect new room size
+        CreateRoom();
     }
 }
