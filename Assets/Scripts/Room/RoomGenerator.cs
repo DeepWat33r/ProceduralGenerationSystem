@@ -6,10 +6,11 @@ using UnityEngine;
 public class RoomGenerator : MonoBehaviour
 {
     public Vector2 roomSize = new Vector2(10, 10); // Room size in units
-    private Vector2 previousRoomSize; // To track changes in room size
+    private Vector2 _previousRoomSize; // To track changes in room size
     public int randomSeed = 123405; // Seed for reproducible randomness
     
     [SerializeField] private Walls walls; // Reference to Walls script
+    [SerializeField] private Floor floor; // Reference to Walls script
 
     void Start()
     {
@@ -20,30 +21,28 @@ public class RoomGenerator : MonoBehaviour
     void Update()
     {
         // Check if room size has changed at runtime
-        if (roomSize != previousRoomSize)
+        if (roomSize != _previousRoomSize)
         {
             UpdateRoom();
-            previousRoomSize = roomSize; // Update previous size to the current
+            _previousRoomSize = roomSize; // Update previous size to the current
         }
     }
 
     private void GetComponents()
     {
         walls = GetComponent<Walls>();
-        if (walls == null)
-        {
-            Debug.LogError("Walls component is missing on the GameObject.");
-        }
-        else
-        {
+        if (walls == null) Debug.LogError("Walls component is missing on the GameObject.");
             walls.SetRandomSeed(randomSeed); // Set the seed for the Walls class
-        }
+        floor = GetComponent<Floor>();
+        if (floor == null) Debug.LogError("Floor component is missing on the GameObject.");
+            floor.SetRandomSeed(randomSeed); // Set the seed for the Walls class
     }
 
     // Method to generate the room by calling wall generation
     private void GenerateRoom()
     {
         walls.GenerateWalls(roomSize);
+        floor.GenerateFloor(roomSize);
     }
 
     // Method to update the room when the size changes
