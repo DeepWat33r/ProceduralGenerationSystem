@@ -208,13 +208,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 128415734}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0.9006421, z: -0, w: 0.4345617}
-  m_LocalPosition: {x: 17.16, y: 3.61, z: 8.76}
+  m_LocalRotation: {x: 0.07806732, y: -0.8859898, z: 0.16179687, w: 0.42749193}
+  m_LocalPosition: {x: 13.76, y: 9.07, z: 11.92}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: -128.485, z: 0}
+  m_LocalEulerAnglesHint: {x: 20.698, y: -128.485, z: 0}
 --- !u!1 &347081838
 GameObject:
   m_ObjectHideFlags: 0
@@ -319,6 +319,7 @@ GameObject:
   m_Component:
   - component: {fileID: 377884019}
   - component: {fileID: 377884018}
+  - component: {fileID: 377884020}
   m_Layer: 0
   m_Name: RoomGenerator
   m_TagString: Untagged
@@ -338,8 +339,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab2bae4494ec97145947395c00bf0dea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  wallPrefab: {fileID: 7975072102154125058, guid: ab1c67ea1823e624ca764ec6a01f88d4, type: 3}
-  roomSize: {x: 10, y: 10}
+  roomSize: {x: 16.42, y: 15.35}
+  randomSeed: 12345
+  walls: {fileID: 377884020}
 --- !u!4 &377884019
 Transform:
   m_ObjectHideFlags: 0
@@ -350,6 +352,98 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &377884020
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 377884017}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0034f8dbce97bd34a8255f50e56d01d9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  wallTypes:
+  - wallPrefab: {fileID: 7975072102154125058, guid: ab1c67ea1823e624ca764ec6a01f88d4, type: 3}
+    spawnChance: 80
+  - wallPrefab: {fileID: 7094297793934813551, guid: 6bff0343350a98248993df5a08bdba46, type: 3}
+    spawnChance: 20
+  - wallPrefab: {fileID: 6346746500496834371, guid: a4d1ff06d0c8bf941a89045672195800, type: 3}
+    spawnChance: 20
+  - wallPrefab: {fileID: 3667341496785687201, guid: 9a06ae470238e2f4397f02410ab79ab5, type: 3}
+    spawnChance: 20
+  pillarPrefab: {fileID: 3142199367683011708, guid: 4d2e482ef88cc2144be85ebc3070e312, type: 3}
+--- !u!1 &1391022589
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1391022592}
+  - component: {fileID: 1391022591}
+  - component: {fileID: 1391022590}
+  m_Layer: 0
+  m_Name: RoomGenerator (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1391022590
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1391022589}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0034f8dbce97bd34a8255f50e56d01d9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  wallTypes:
+  - wallPrefab: {fileID: 7975072102154125058, guid: ab1c67ea1823e624ca764ec6a01f88d4, type: 3}
+    spawnChance: 80
+  - wallPrefab: {fileID: 7094297793934813551, guid: 6bff0343350a98248993df5a08bdba46, type: 3}
+    spawnChance: 20
+  - wallPrefab: {fileID: 6346746500496834371, guid: a4d1ff06d0c8bf941a89045672195800, type: 3}
+    spawnChance: 20
+  - wallPrefab: {fileID: 3667341496785687201, guid: 9a06ae470238e2f4397f02410ab79ab5, type: 3}
+    spawnChance: 20
+  pillarPrefab: {fileID: 3142199367683011708, guid: 4d2e482ef88cc2144be85ebc3070e312, type: 3}
+--- !u!114 &1391022591
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1391022589}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab2bae4494ec97145947395c00bf0dea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  roomSize: {x: 10, y: 10}
+  randomSeed: 12345
+  walls: {fileID: 1391022590}
+--- !u!4 &1391022592
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1391022589}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 27.65, y: 0, z: -30.59}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -468,3 +562,4 @@ SceneRoots:
   - {fileID: 347081840}
   - {fileID: 1920720371}
   - {fileID: 377884019}
+  - {fileID: 1391022592}
