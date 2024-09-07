@@ -10,7 +10,8 @@ public class RoomGenerator : MonoBehaviour
     public int randomSeed = 123405; // Seed for reproducible randomness
     
     [SerializeField] private Walls walls; // Reference to Walls script
-    [SerializeField] private Floor floor; // Reference to Walls script
+    [SerializeField] private Floor floor;
+    [SerializeField] private Ceiling ceiling;
 
     void Start()
     {
@@ -36,6 +37,7 @@ public class RoomGenerator : MonoBehaviour
         floor = GetComponent<Floor>();
         if (floor == null) Debug.LogError("Floor component is missing on the GameObject.");
             floor.SetRandomSeed(randomSeed); // Set the seed for the Walls class
+        ceiling = GetComponent<Ceiling>();
     }
 
     // Method to generate the room by calling wall generation
@@ -43,6 +45,7 @@ public class RoomGenerator : MonoBehaviour
     {
         walls.GenerateWalls(roomSize);
         floor.GenerateFloor(roomSize);
+        ceiling.GenerateCeiling(roomSize);
     }
 
     // Method to update the room when the size changes
