@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using Random = System.Random;
 
 namespace Room
 {
@@ -19,13 +20,11 @@ namespace Room
     public class Floor : MonoBehaviour
     {
         public List<FloorType> floorTypes; // List of the four different floor types
-        private System.Random random;      // System.Random instance for seeded randomness
+        private Random _random;      // System.Random instance for seeded randomness
 
         // Method to set the random seed
-        public void SetRandomSeed(int seed)
-        {
-            random = new System.Random(seed); // Initialize System.Random with the provided seed
-        }
+        public void SetRandomSeed(int seed) => _random = new Random(seed); // Initialize System.Random with the provided seed
+
 
         // Method to generate the floor based on room size
         public void GenerateFloor(Vector2 roomSize)
@@ -39,11 +38,7 @@ namespace Room
 
             // Randomly select one of the four floor types
             FloorType selectedFloorType = GetRandomFloorType();
-            if (selectedFloorType == null)
-            {
-                Debug.LogError("Failed to select a floor type.");
-                return;
-            }
+            if (selectedFloorType == null) { Debug.LogError("Failed to select a floor type."); return; }
 
             // Calculate tile size for scaling
             Vector2 tileSize = new Vector2(roomSize.x / tileCountX, roomSize.y / tileCountZ);
@@ -54,8 +49,7 @@ namespace Room
                 for (int z = 0; z < tileCountZ; z++)
                 {
                     // Calculate the position for each floor tile, centering in the room
-                    Vector3 position = basePosition + 
-                                       new Vector3(x * tileSize.x - roomSize.x / 2f + tileSize.x / 2f, 0, z * tileSize.y - roomSize.y / 2f + tileSize.y / 2f);
+                    Vector3 position = basePosition + new Vector3(x * tileSize.x - roomSize.x / 2f + tileSize.x / 2f, 0, z * tileSize.y - roomSize.y / 2f + tileSize.y / 2f);
 
                     // Select a random prefab from the chosen floor type
                     FloorPrefab selectedFloorPrefab = GetRandomFloorPrefab(selectedFloorType);
@@ -79,14 +73,10 @@ namespace Room
         // Helper method to select a random floor type
         private FloorType GetRandomFloorType()
         {
-            if (floorTypes == null || floorTypes.Count == 0)
-            {
-                Debug.LogError("No floor types available for selection.");
-                return null;
-            }
+            if (floorTypes == null || floorTypes.Count == 0) { Debug.LogError("No floor types available for selection."); return null; }
 
             // Since each type has equal probability, simply use Random to select one
-            int selectedIndex = random.Next(floorTypes.Count);
+            int selectedIndex = _random.Next(floorTypes.Count);
             return floorTypes[selectedIndex];
         }
 
@@ -94,21 +84,15 @@ namespace Room
         private FloorPrefab GetRandomFloorPrefab(FloorType floorType)
         {
             float totalChance = 0f;
-            foreach (var prefab in floorType.floorPrefabs)
-            {
-                totalChance += prefab.spawnChance;
-            }
+            foreach (var prefab in floorType.floorPrefabs) totalChance += prefab.spawnChance;
 
-            float randomValue = (float)random.NextDouble() * totalChance;
+            float randomValue = (float)_random.NextDouble() * totalChance;
             float cumulativeChance = 0f;
 
             foreach (var prefab in floorType.floorPrefabs)
             {
                 cumulativeChance += prefab.spawnChance;
-                if (randomValue < cumulativeChance)
-                {
-                    return prefab;
-                }
+                if (randomValue < cumulativeChance) return prefab;
             }
 
             return null; // Fallback, though this should not happen

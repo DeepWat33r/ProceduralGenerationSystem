@@ -14,11 +14,7 @@ namespace Room
 
             // Get the mesh size from the ceiling prefab to calculate the number of tiles needed
             MeshFilter meshFilter = ceilingPrefab.GetComponentInChildren<MeshFilter>();
-            if (meshFilter == null)
-            {
-                Debug.LogError("Ceiling prefab does not have a MeshFilter component.");
-                return;
-            }
+            if (meshFilter == null) { Debug.LogError("Ceiling prefab does not have a MeshFilter component."); return; }
 
             Vector3 meshSize = meshFilter.sharedMesh.bounds.size;
             Vector3 prefabScale = ceilingPrefab.transform.localScale;
@@ -40,11 +36,7 @@ namespace Room
                 for (int z = 0; z < tileCountZ; z++)
                 {
                     // Calculate the position for each ceiling tile, centering in the room
-                    Vector3 position = basePosition + new Vector3(
-                        x * tileSize.x - roomSize.x / 2f + tileSize.x / 2f,
-                        ceilingHeight,
-                        z * tileSize.y - roomSize.y / 2f + tileSize.y / 2f
-                    );
+                    Vector3 position = basePosition + new Vector3(x * tileSize.x - roomSize.x / 2f + tileSize.x / 2f, ceilingHeight, z * tileSize.y - roomSize.y / 2f + tileSize.y / 2f);
 
                     // Instantiate the ceiling tile
                     GameObject ceilingTile = Instantiate(ceilingPrefab, position, Quaternion.identity, transform);
@@ -80,22 +72,14 @@ namespace Room
         }
         private float GetWallHeight()
         {
-            if (wallsScript == null)
-            {
-                Debug.LogError("Walls script reference is missing. Cannot determine ceiling height.");
-                return 4f; // Fallback value
-            }
+            if (wallsScript == null) { Debug.LogError("Walls script reference is missing. Cannot determine ceiling height."); return 4f; }
 
             // Assume walls are uniform in height, get height from one of the wall types
-            WallType sampleWallType = wallsScript.wallTypes[0];  // Example: take the first wall type
+            WallType sampleWallType = wallsScript.wallTypes[0];  
             GameObject wallPrefab = sampleWallType.wallPrefab;
             MeshFilter meshFilter = wallPrefab.GetComponentInChildren<MeshFilter>();
 
-            if (meshFilter == null)
-            {
-                Debug.LogError("Wall prefab does not have a MeshFilter component.");
-                return 4f; // Fallback value
-            }
+            if (meshFilter == null) { Debug.LogError("Wall prefab does not have a MeshFilter component."); return 4f; }
 
             // Calculate the wall height considering its scale
             Vector3 wallSize = meshFilter.sharedMesh.bounds.size;

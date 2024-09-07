@@ -18,39 +18,37 @@ public class RoomGenerator : MonoBehaviour
         GetComponents();
         GenerateRoom();
     }
-
-    void Update()
-    {
-        // Check if room size has changed at runtime
-        if (roomSize != _previousRoomSize)
-        {
-            UpdateRoom();
-            _previousRoomSize = roomSize; // Update previous size to the current
-        }
-    }
-
-    private void GetComponents()
-    {
-        walls = GetComponent<Walls>();
-        if (walls == null) Debug.LogError("Walls component is missing on the GameObject.");
-            walls.SetRandomSeed(randomSeed); // Set the seed for the Walls class
-        floor = GetComponent<Floor>();
-        if (floor == null) Debug.LogError("Floor component is missing on the GameObject.");
-            floor.SetRandomSeed(randomSeed); // Set the seed for the Walls class
-        ceiling = GetComponent<Ceiling>();
-    }
-
-    // Method to generate the room by calling wall generation
+    
     private void GenerateRoom()
     {
         walls.GenerateWalls(roomSize);
         floor.GenerateFloor(roomSize);
-        ceiling.GenerateCeiling(roomSize);
+        //ceiling.GenerateCeiling(roomSize);
     }
-
-    // Method to update the room when the size changes
+    
+    void Update()
+    {
+        // Check if room size has changed at runtime
+        if (roomSize != _previousRoomSize) 
+            UpdateRoom(); _previousRoomSize = roomSize; // Update previous size to the current
+    }
+    
     private void UpdateRoom()
     {
         GenerateRoom();
+    }
+    
+    private void GetComponents()
+    {
+        walls = GetComponent<Walls>();
+        if (walls == null) Debug.LogError("Walls component is missing on the GameObject."); 
+        walls.SetRandomSeed(randomSeed); // Set the seed for the Walls class
+        
+        floor = GetComponent<Floor>();
+        if (floor == null) Debug.LogError("Floor component is missing on the GameObject.");
+        floor.SetRandomSeed(randomSeed); // Set the seed for the Walls class
+        
+        ceiling = GetComponent<Ceiling>();
+        
     }
 }
