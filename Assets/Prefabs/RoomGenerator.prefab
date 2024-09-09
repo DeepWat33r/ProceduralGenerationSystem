@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 8794088093104863482}
   - component: {fileID: 8974660737083579241}
   - component: {fileID: 6672407747721771453}
+  - component: {fileID: 94800079009975140}
   m_Layer: 0
   m_Name: RoomGenerator
   m_TagString: Untagged
@@ -51,6 +52,7 @@ MonoBehaviour:
   randomSeed: 12345
   walls: {fileID: 8794088093104863482}
   floor: {fileID: 8974660737083579241}
+  ceiling: {fileID: 6672407747721771453}
 --- !u!114 &8794088093104863482
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -131,3 +133,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ceilingPrefab: {fileID: 1100984533900727109, guid: 267ab7c473f81814c922525a5ac20d16, type: 3}
+  wallsScript: {fileID: 8794088093104863482}
+--- !u!114 &94800079009975140
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7256483346805395594}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 34be48a8b28f0704ebff1a7fedcd61c9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cellSize: 1
