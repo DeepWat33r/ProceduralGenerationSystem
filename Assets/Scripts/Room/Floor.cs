@@ -65,7 +65,7 @@ namespace Room
                     ScaleFloorTile(floorTile, tileSize);
 
                     // Log the position and type for debugging
-                    Debug.Log($"Floor Tile Position: {position}, Type: {selectedFloorType.typeName}");
+                    //Debug.Log($"Floor Tile Position: {position}, Type: {selectedFloorType.typeName}");
                 }
             }
         }

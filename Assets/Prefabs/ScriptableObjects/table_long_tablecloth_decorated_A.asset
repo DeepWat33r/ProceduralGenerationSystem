@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c1ffb0c576ea47d4a9943aa66061341a, type: 3}
+  m_Name: table_long_tablecloth_decorated_A
+  m_EditorClassIdentifier: 
+  prefab: {fileID: 6787825564474002140, guid: 13f0868acd560e149b8ed1a17523164e, type: 3}
+  area: {x: 2, y: 3}
+  zone: 0
+  chances: 0.2

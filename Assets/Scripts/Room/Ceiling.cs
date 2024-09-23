@@ -45,7 +45,7 @@ namespace Room
                     ScaleCeilingTile(ceilingTile, tileSize);
 
                     // Log the position for debugging
-                    Debug.Log($"Ceiling Tile Position: {position}");
+                    //Debug.Log($"Ceiling Tile Position: {position}");
                 }
             }
         }

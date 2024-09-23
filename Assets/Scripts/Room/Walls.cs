@@ -88,7 +88,7 @@ namespace Room
                 wall.transform.localScale = new Vector3(scale * wallPrefabScale.x, wallPrefabScale.y, wallPrefabScale.z);
 
                 // Log the position, size, and scale to debug
-                Debug.Log($"Wall Position: {position}, Scaled Mesh Size: {scaledWallMeshSize}, Scale: {scale}, Rotated: {rotate}, Additional Rotation: {additionalRotation}");
+                //Debug.Log($"Wall Position: {position}, Scaled Mesh Size: {scaledWallMeshSize}, Scale: {scale}, Rotated: {rotate}, Additional Rotation: {additionalRotation}");
             }
         }
 

@@ -1,54 +1,68 @@
-using System.Collections;
-using System.Collections.Generic;
-using Room;
+using Room.Grid;
 using UnityEngine;
 
-public class RoomGenerator : MonoBehaviour
+namespace Room
 {
-    public Vector2 roomSize = new Vector2(10, 10); // Room size in units
-    private Vector2 _previousRoomSize; // To track changes in room size
-    public int randomSeed = 123405; // Seed for reproducible randomness
-    
-    [SerializeField] private Walls walls; // Reference to Walls script
-    [SerializeField] private Floor floor;
-    [SerializeField] private Ceiling ceiling;
+    public class RoomGenerator : MonoBehaviour
+    {
+        public Vector2 roomSize = new Vector2(10, 10);
+        public int randomSeed = 12345;
 
-    void Start()
-    {
-        GetComponents();
-        GenerateRoom();
-    }
-    
-    private void GenerateRoom()
-    {
-        walls.GenerateWalls(roomSize);
-        floor.GenerateFloor(roomSize);
-        //ceiling.GenerateCeiling(roomSize);
-    }
-    
-    void Update()
-    {
-        // Check if room size has changed at runtime
-        if (roomSize != _previousRoomSize) 
-            UpdateRoom(); _previousRoomSize = roomSize; // Update previous size to the current
-    }
-    
-    private void UpdateRoom()
-    {
-        GenerateRoom();
-    }
-    
-    private void GetComponents()
-    {
-        walls = GetComponent<Walls>();
-        if (walls == null) Debug.LogError("Walls component is missing on the GameObject."); 
-        walls.SetRandomSeed(randomSeed); // Set the seed for the Walls class
-        
-        floor = GetComponent<Floor>();
-        if (floor == null) Debug.LogError("Floor component is missing on the GameObject.");
-        floor.SetRandomSeed(randomSeed); // Set the seed for the Walls class
-        
-        ceiling = GetComponent<Ceiling>();
-        
+        [SerializeField] private Walls walls;
+        [SerializeField] private Floor floor;
+        [SerializeField] private Ceiling ceiling;
+        private GridManager gridManager;
+        private DecorationManager decorationManager;
+
+        private Vector2 previousRoomSize;
+
+        void Start()
+        {
+            GetComponents();
+            GenerateRoom();
+            previousRoomSize = roomSize;
+        }
+
+        void Update()
+        {
+            if (roomSize != previousRoomSize)
+            {
+                GenerateRoom();
+                previousRoomSize = roomSize;
+            }
+        }
+
+        private void GenerateRoom()
+        {
+            walls.GenerateWalls(roomSize);
+            floor.GenerateFloor(roomSize);
+            //ceiling.GenerateCeiling(roomSize);
+
+            gridManager.CreateGrid();
+
+            decorationManager.SetRandomSeed(randomSeed);
+            decorationManager.PopulateGridWithDecorations();
+        }
+
+        private void GetComponents()
+        {
+            walls = GetComponent<Walls>();
+            if (walls == null) Debug.LogError("Walls component is missing on the GameObject.");
+            walls.SetRandomSeed(randomSeed);
+
+            floor = GetComponent<Floor>();
+            if (floor == null) Debug.LogError("Floor component is missing on the GameObject.");
+            floor.SetRandomSeed(randomSeed);
+
+            ceiling = GetComponent<Ceiling>();
+            if (ceiling == null) Debug.LogError("Ceiling component is missing on the GameObject.");
+
+            gridManager = GetComponent<GridManager>();
+            if (gridManager == null) Debug.LogError("GridManager component is missing on the GameObject.");
+
+            decorationManager = GetComponent<DecorationManager>();
+            if (decorationManager == null) Debug.LogError("DecorationManager component is missing on the GameObject.");
+            decorationManager.SetRandomSeed(randomSeed);
+        }
     }
 }

@@ -7,20 +7,22 @@ namespace Room.Grid
 
     public class Cell
     {
-        public Vector3 position;
-        public CellTag zone;
-        public CellSideTag side;
+        public Vector3 Position;
+        public CellTag Zone;
+        public CellSideTag Side;
+        public bool IsOccupied;
 
         public Cell(Vector3 position, CellTag zone, CellSideTag side)
         {
-            this.position = position;
-            this.zone = zone;
-            this.side = side;
+            Position = position;
+            Zone = zone;
+            Side = side;
+            IsOccupied = false;
         }
 
         public override string ToString()
         {
-            return $"{position} + {side}";
+            return $"{Position} + {Side}";
         }
     }
 }
