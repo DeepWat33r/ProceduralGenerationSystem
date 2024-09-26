@@ -15,4 +15,4 @@ MonoBehaviour:
   prefab: {fileID: 3903911879492955085, guid: 6aab17be8ca91524aab16978b627b472, type: 3}
   area: {x: 2, y: 1}
   zone: 0
-  chances: 0.2
+  chances: 0.08

@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: table_long_A
   m_EditorClassIdentifier: 
   prefab: {fileID: 7211244864165961906, guid: 00244a5aca9f6aa47a387185b68da366, type: 3}
-  area: {x: 2, y: 3}
+  area: {x: 2, y: 4}
   zone: 0
   chances: 0.2

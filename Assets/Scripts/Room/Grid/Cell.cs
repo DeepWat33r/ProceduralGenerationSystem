@@ -3,7 +3,7 @@ using UnityEngine;
 namespace Room.Grid
 {
     public enum CellTag { Inner, Outer }
-    public enum CellSideTag { North, South, East, West, Center }
+    public enum CellSideTag { North, South, East, West}
 
     public class Cell
     {

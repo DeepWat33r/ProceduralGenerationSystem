@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using Room.Grid;
 
 namespace Room.Grid
 {
@@ -9,6 +10,10 @@ namespace Room.Grid
     {
         public List<DecorationAsset> decorationAssets;
         public int randomSeed = 12345;
+
+        [Range(0f, 1f)]
+        public float decorationDensity = 0.3f; // Controls overall decoration density
+
         private GridManager gridManager;
         private System.Random random;
 
@@ -31,9 +36,15 @@ namespace Room.Grid
             {
                 if (cell.IsOccupied) continue;
 
+                // Chance to skip this cell entirely
+                float placementChance = (float)random.NextDouble();
+                if (placementChance > decorationDensity)
+                    continue;
+
                 var possibleDecorations = decorationAssets.Where(x => x.zone == cell.Zone).ToList();
                 if (possibleDecorations.Count == 0) continue;
 
+                // Random chance to place a decoration based on zone chance
                 float zoneChance = GetZoneChance(cell.Zone);
                 float rand = (float)random.NextDouble();
 
@@ -42,9 +53,14 @@ namespace Room.Grid
                     var decoration = PickOneAsset(possibleDecorations);
                     if (decoration != null)
                     {
-                        if (CanPlaceDecoration(cell, decoration))
+                        // Random rotation (0, 90, 180, or 270 degrees)
+                        int[] possibleRotations = { 0, 90, 180, 270 };
+                        int rotationIndex = random.Next(0, possibleRotations.Length);
+                        int rotationAngle = possibleRotations[rotationIndex];
+
+                        if (CanPlaceDecoration(cell, decoration, rotationAngle))
                         {
-                            PlaceDecoration(cell, decoration);
+                            PlaceDecoration(cell, decoration, rotationAngle);
                         }
                     }
                 }
@@ -53,7 +69,7 @@ namespace Room.Grid
 
         private float GetZoneChance(CellTag zone)
         {
-            return zone == CellTag.Inner ? 0.7f : 0.3f;
+            return zone == CellTag.Inner ? 0.5f : 0.2f; // Adjusted values to reduce number of decorations
         }
 
         private DecorationAsset PickOneAsset(List<DecorationAsset> possibleDecorations)
@@ -73,13 +89,21 @@ namespace Room.Grid
             return null;
         }
 
-        private bool CanPlaceDecoration(Cell startingCell, DecorationAsset decoration)
+        private bool CanPlaceDecoration(Cell startingCell, DecorationAsset decoration, int rotationAngle)
         {
             int width = (int)decoration.area.x;
             int height = (int)decoration.area.y;
 
+            // Adjust width and height based on rotation
+            if (rotationAngle == 90 || rotationAngle == 270)
+            {
+                int temp = width;
+                width = height;
+                height = temp;
+            }
+
             var cellsCovered = GetCellsCovered(startingCell, width, height);
-            if (cellsCovered == null) return false;
+            if (cellsCovered == null || cellsCovered.Count == 0) return false;
 
             foreach (var cell in cellsCovered)
             {
@@ -96,15 +120,22 @@ namespace Room.Grid
             int startX = gridManager.GetCellIndexX(startingCell.Position.x);
             int startZ = gridManager.GetCellIndexZ(startingCell.Position.z);
 
+            // Adjust starting indices to center the decoration
+            int offsetX = width / 2;
+            int offsetZ = height / 2;
+
+            int startIndexX = startX - offsetX + (width % 2 == 0 ? 1 : 0);
+            int startIndexZ = startZ - offsetZ + (height % 2 == 0 ? 1 : 0);
+
             for (int x = 0; x < width; x++)
             {
                 for (int z = 0; z < height; z++)
                 {
-                    int cellX = startX + x;
-                    int cellZ = startZ + z;
+                    int cellX = startIndexX + x;
+                    int cellZ = startIndexZ + z;
 
                     Cell cell = gridManager.GetCellAt(cellX, cellZ);
-                    if (cell == null) return null;
+                    if (cell == null) return null; // Decoration doesn't fit
                     cellsCovered.Add(cell);
                 }
             }
@@ -112,30 +143,48 @@ namespace Room.Grid
             return cellsCovered;
         }
 
-        private void PlaceDecoration(Cell startingCell, DecorationAsset decoration)
+        private void PlaceDecoration(Cell startingCell, DecorationAsset decoration, int rotationAngle)
         {
-            var cellsCovered = GetCellsCovered(startingCell, (int)decoration.area.x, (int)decoration.area.y);
+            int width = (int)decoration.area.x;
+            int height = (int)decoration.area.y;
+
+            // Adjust width and height based on rotation
+            if (rotationAngle == 90 || rotationAngle == 270)
+            {
+                int temp = width;
+                width = height;
+                height = temp;
+            }
+
+            var cellsCovered = GetCellsCovered(startingCell, width, height);
+            if (cellsCovered == null || cellsCovered.Count == 0) return;
+
+            // Mark cells as occupied
             foreach (var cell in cellsCovered)
             {
                 cell.IsOccupied = true;
             }
 
-            Vector3 position = startingCell.Position;
-            Quaternion rotation = GetRotation(startingCell.Side);
+            // Calculate the center position of the decoration
+            Vector3 position = CalculateDecorationPosition(cellsCovered);
+            Quaternion rotation = Quaternion.Euler(0, rotationAngle, 0);
 
             Instantiate(decoration.prefab, position, rotation, transform);
         }
 
-        private Quaternion GetRotation(CellSideTag side)
+        private Vector3 CalculateDecorationPosition(List<Cell> cellsCovered)
         {
-            switch (side)
+            if (cellsCovered == null || cellsCovered.Count == 0)
             {
-                case CellSideTag.North: return Quaternion.Euler(0, 0, 0);
-                case CellSideTag.South: return Quaternion.Euler(0, 180, 0);
-                case CellSideTag.East: return Quaternion.Euler(0, 90, 0);
-                case CellSideTag.West: return Quaternion.Euler(0, -90, 0);
-                default: return Quaternion.identity;
+                Debug.LogError("Cannot calculate decoration position: cellsCovered is null or empty.");
+                return Vector3.zero;
             }
+            Vector3 sumPosition = Vector3.zero;
+            foreach (var cell in cellsCovered)
+            {
+                sumPosition += cell.Position;
+            }
+            return sumPosition / cellsCovered.Count;
         }
     }
 }

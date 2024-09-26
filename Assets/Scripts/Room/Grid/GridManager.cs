@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
 namespace Room.Grid
@@ -28,9 +27,9 @@ namespace Room.Grid
 
             cells.Clear();
 
-            for (int x = 0; x < GridWidth; x++)
+            for (int z = 0; z < GridHeight; z++)
             {
-                for (int z = 0; z < GridHeight; z++)
+                for (int x = 0; x < GridWidth; x++)
                 {
                     Vector3 position = basePosition + new Vector3(
                         x * cellSize - roomGenerator.roomSize.x / 2f + cellSize / 2f,
@@ -100,8 +99,14 @@ namespace Room.Grid
 
             foreach (var cell in cells)
             {
-                Gizmos.color = cell.IsOccupied ? Color.gray :
-                               cell.Zone == CellTag.Inner ? Color.green : Color.red;
+                if (cell.IsOccupied)
+                {
+                    Gizmos.color = Color.red; // Occupied cells are red
+                }
+                else
+                {
+                    Gizmos.color = cell.Zone == CellTag.Inner ? Color.green : Color.yellow; // Inner unoccupied cells are green, outer are yellow
+                }
 
                 Gizmos.DrawWireCube(cell.Position, new Vector3(cellSize, 0.1f, cellSize));
             }

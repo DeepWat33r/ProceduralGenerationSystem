@@ -345,6 +345,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 9c26ad5b419aff44b9b4fe239a7149a7, type: 2}
   - {fileID: 11400000, guid: 63d8ba142fb40e74782e50e289e56d5d, type: 2}
   randomSeed: 12345
+  decorationDensity: 0.2
 --- !u!1001 &1370366645
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -355,7 +356,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 94800079009975140, guid: b032e1208a86c2542b02435fd8fafdc3, type: 3}
       propertyPath: cellSize
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7256483346805395594, guid: b032e1208a86c2542b02435fd8fafdc3, type: 3}
       propertyPath: m_Name

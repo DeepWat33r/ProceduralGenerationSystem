@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: table_long_tablecloth_decorated_A
   m_EditorClassIdentifier: 
   prefab: {fileID: 6787825564474002140, guid: 13f0868acd560e149b8ed1a17523164e, type: 3}
-  area: {x: 2, y: 3}
+  area: {x: 2, y: 4}
   zone: 0
-  chances: 0.2
+  chances: 0.15
