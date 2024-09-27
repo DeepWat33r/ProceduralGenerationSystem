@@ -15,4 +15,7 @@ MonoBehaviour:
   prefab: {fileID: 3850581457267560107, guid: 460d45deb28143544b362902fe6cab00, type: 3}
   area: {x: 2, y: 3}
   zone: 0
-  chances: 0.1
+  chances: 0
+  hasAssociatedDecorations: 0
+  associatedDecorationType: 0
+  decorationType: 3

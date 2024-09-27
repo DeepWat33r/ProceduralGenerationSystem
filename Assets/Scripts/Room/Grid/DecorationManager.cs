@@ -12,7 +12,7 @@ namespace Room.Grid
         public int randomSeed = 12345;
 
         [Range(0f, 1f)]
-        public float decorationDensity = 0.3f; // Controls overall decoration density
+        public float decorationDensity = 0.3f;
 
         private GridManager gridManager;
         private System.Random random;
@@ -34,14 +34,17 @@ namespace Room.Grid
 
             foreach (var cell in gridManager.Cells)
             {
-                if (cell.IsOccupied) continue;
+                if (cell.IsOccupied || cell.ReservedFor != DecorationType.None) continue;
 
                 // Chance to skip this cell entirely
                 float placementChance = (float)random.NextDouble();
                 if (placementChance > decorationDensity)
                     continue;
 
-                var possibleDecorations = decorationAssets.Where(x => x.zone == cell.Zone).ToList();
+                // Exclude chairs from initial placement
+                var possibleDecorations = decorationAssets
+                    .Where(x => x.zone == cell.Zone && x.decorationType != DecorationType.None && x.decorationType != DecorationType.Chair)
+                    .ToList();
                 if (possibleDecorations.Count == 0) continue;
 
                 // Random chance to place a decoration based on zone chance
@@ -65,11 +68,14 @@ namespace Room.Grid
                     }
                 }
             }
+
+            // Place associated decorations after initial placement
+            PlaceReservedDecorations();
         }
 
         private float GetZoneChance(CellTag zone)
         {
-            return zone == CellTag.Inner ? 0.5f : 0.2f; // Adjusted values to reduce number of decorations
+            return zone == CellTag.Inner ? 0.5f : 0.2f;
         }
 
         private DecorationAsset PickOneAsset(List<DecorationAsset> possibleDecorations)
@@ -107,11 +113,21 @@ namespace Room.Grid
 
             foreach (var cell in cellsCovered)
             {
-                if (cell.IsOccupied) return false;
+                if (cell.IsOccupied || cell.ReservedFor != DecorationType.None)
+                    return false;
+
+                // For tables, ensure there is space for chairs
+                if (decoration.decorationType == DecorationType.Table)
+                {
+                    List<Cell> adjacentCells = GetAdjacentCells(cell);
+                    if (adjacentCells.Count == 0)
+                        return false; // No adjacent cells available
+                }
             }
 
             return true;
         }
+
 
         private List<Cell> GetCellsCovered(Cell startingCell, int width, int height)
         {
@@ -135,7 +151,7 @@ namespace Room.Grid
                     int cellZ = startIndexZ + z;
 
                     Cell cell = gridManager.GetCellAt(cellX, cellZ);
-                    if (cell == null) return null; // Decoration doesn't fit
+                    if (cell == null) return null;
                     cellsCovered.Add(cell);
                 }
             }
@@ -165,11 +181,131 @@ namespace Room.Grid
                 cell.IsOccupied = true;
             }
 
+            // Reserve adjacent cells if the decoration has associated decorations
+            if (decoration.hasAssociatedDecorations)
+            {
+                ReserveAdjacentCells(cellsCovered, decoration.associatedDecorationType);
+            }
+
             // Calculate the center position of the decoration
             Vector3 position = CalculateDecorationPosition(cellsCovered);
             Quaternion rotation = Quaternion.Euler(0, rotationAngle, 0);
 
             Instantiate(decoration.prefab, position, rotation, transform);
+        }
+
+        private void ReserveAdjacentCells(List<Cell> cellsCovered, DecorationType reservationType)
+        {
+            int reservationsMade = 0;
+            foreach (var cell in cellsCovered)
+            {
+                // Get adjacent cells
+                List<Cell> adjacentCells = GetAdjacentCells(cell);
+                Debug.Log($"Table at ({cell.Position.x}, {cell.Position.z}) has {adjacentCells.Count} adjacent cells.");
+                foreach (var adjacentCell in adjacentCells)
+                {
+                    if (!adjacentCell.IsOccupied && adjacentCell.ReservedFor == DecorationType.None)
+                    {
+                        adjacentCell.ReservedFor = reservationType;
+                        adjacentCell.ReservedBy = cell; // Keep track of the table cell that reserved it
+                        reservationsMade++;
+                        Debug.Log($"Reserved cell at ({adjacentCell.Position.x}, {adjacentCell.Position.z}) for {reservationType}.");
+                    }
+                    else
+                    {
+                        Debug.Log($"Cannot reserve cell at ({adjacentCell.Position.x}, {adjacentCell.Position.z}) - Occupied: {adjacentCell.IsOccupied}, ReservedFor: {adjacentCell.ReservedFor}");
+                    }
+                }
+            }
+            Debug.Log($"Reserved {reservationsMade} cells for {reservationType}.");
+        }
+
+        private List<Cell> GetAdjacentCells(Cell cell)
+        {
+            List<Cell> adjacentCells = new List<Cell>();
+
+            int cellX = gridManager.GetCellIndexX(cell.Position.x);
+            int cellZ = gridManager.GetCellIndexZ(cell.Position.z);
+
+            int[] dx = { -1, 0, 1, 0 };
+            int[] dz = { 0, 1, 0, -1 };
+
+            for (int i = 0; i < 4; i++)
+            {
+                int adjacentX = cellX + dx[i];
+                int adjacentZ = cellZ + dz[i];
+
+                Cell adjacentCell = gridManager.GetCellAt(adjacentX, adjacentZ);
+                if (adjacentCell != null)
+                {
+                    adjacentCells.Add(adjacentCell);
+                }
+                else
+                {
+                    Debug.Log($"Adjacent cell at index ({adjacentX}, {adjacentZ}) is out of bounds.");
+                }
+            }
+
+            return adjacentCells;
+        }
+
+        public void PlaceReservedDecorations()
+        {
+            int chairPlacementAttempts = 0;
+            foreach (var cell in gridManager.Cells)
+            {
+                if (!cell.IsOccupied && cell.ReservedFor == DecorationType.Chair)
+                {
+                    // Get chair decorations
+                    var possibleDecorations = decorationAssets
+                        .Where(x => x.decorationType == DecorationType.Chair && !x.hasAssociatedDecorations)
+                        .ToList();
+
+                    if (possibleDecorations.Count == 0)
+                    {
+                        Debug.LogWarning("No chair decorations found to place.");
+                        continue;
+                    }
+
+                    var decoration = possibleDecorations[0]; // Or implement selection logic
+                    if (decoration != null)
+                    {
+                        // Calculate rotation angle based on position relative to the table
+                        int rotationAngle = CalculateChairRotation(cell, cell.ReservedBy);
+                        PlaceDecorationAtCell(cell, decoration, rotationAngle);
+                        chairPlacementAttempts++;
+                    }
+
+                    // Clear the reservation
+                    cell.ReservedFor = DecorationType.None;
+                    cell.ReservedBy = null;
+                }
+            }
+            Debug.Log($"Attempted to place chairs at {chairPlacementAttempts} reserved cells.");
+        }
+
+
+        private int CalculateChairRotation(Cell chairCell, Cell tableCell)
+        {
+            Vector3 direction = (chairCell.Position - tableCell.Position).normalized;
+            float angle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg;
+            int rotationAngle = Mathf.RoundToInt(angle / 90f) * 90;
+            return rotationAngle;
+        }
+
+        private void PlaceDecorationAtCell(Cell cell, DecorationAsset decoration, int rotationAngle)
+        {
+            // Check if the decoration can be placed
+            if (CanPlaceDecoration(cell, decoration, rotationAngle))
+            {
+                // Mark cell as occupied
+                cell.IsOccupied = true;
+
+                // Place the decoration
+                Vector3 position = cell.Position;
+                Quaternion rotation = Quaternion.Euler(0, rotationAngle, 0);
+                Instantiate(decoration.prefab, position, rotation, transform);
+            }
         }
 
         private Vector3 CalculateDecorationPosition(List<Cell> cellsCovered)

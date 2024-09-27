@@ -3,7 +3,7 @@ using UnityEngine;
 namespace Room.Grid
 {
     public enum CellTag { Inner, Outer }
-    public enum CellSideTag { North, South, East, West}
+    public enum CellSideTag { North, South, East, West, Center }
 
     public class Cell
     {
@@ -11,6 +11,8 @@ namespace Room.Grid
         public CellTag Zone;
         public CellSideTag Side;
         public bool IsOccupied;
+        public DecorationType ReservedFor; // New property
+        public Cell ReservedBy;            // New property
 
         public Cell(Vector3 position, CellTag zone, CellSideTag side)
         {
@@ -18,11 +20,8 @@ namespace Room.Grid
             Zone = zone;
             Side = side;
             IsOccupied = false;
-        }
-
-        public override string ToString()
-        {
-            return $"{Position} + {Side}";
+            ReservedFor = DecorationType.None; // Initialize as None
+            ReservedBy = null;                 // Initialize as null
         }
     }
 }

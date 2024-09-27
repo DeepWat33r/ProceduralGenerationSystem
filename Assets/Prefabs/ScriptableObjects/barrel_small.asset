@@ -16,3 +16,6 @@ MonoBehaviour:
   area: {x: 1, y: 1}
   zone: 0
   chances: 0.1
+  hasAssociatedDecorations: 0
+  associatedDecorationType: 0
+  decorationType: 4

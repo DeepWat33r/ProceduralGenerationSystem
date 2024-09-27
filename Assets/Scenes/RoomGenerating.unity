@@ -358,6 +358,14 @@ PrefabInstance:
       propertyPath: cellSize
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 94800079009975140, guid: b032e1208a86c2542b02435fd8fafdc3, type: 3}
+      propertyPath: wallThickness
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6865267891079332967, guid: b032e1208a86c2542b02435fd8fafdc3, type: 3}
+      propertyPath: randomSeed
+      value: 12345
+      objectReference: {fileID: 0}
     - target: {fileID: 7256483346805395594, guid: b032e1208a86c2542b02435fd8fafdc3, type: 3}
       propertyPath: m_Name
       value: RoomGenerator

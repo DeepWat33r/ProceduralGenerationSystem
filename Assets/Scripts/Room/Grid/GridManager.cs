@@ -7,6 +7,7 @@ namespace Room.Grid
     public class GridManager : MonoBehaviour
     {
         public float cellSize = 1f;
+        public float wallThickness = 0.5f; // Adjust based on your wall's actual thickness
         private List<Cell> cells = new List<Cell>();
         private RoomGenerator roomGenerator;
 
@@ -22,8 +23,22 @@ namespace Room.Grid
         public void CreateGrid()
         {
             Vector3 basePosition = transform.position;
-            GridWidth = Mathf.CeilToInt(roomGenerator.roomSize.x / cellSize);
-            GridHeight = Mathf.CeilToInt(roomGenerator.roomSize.y / cellSize);
+
+            // Effective room dimensions (inside the walls)
+            float effectiveRoomWidth = roomGenerator.roomSize.x - 2 * wallThickness;
+            float effectiveRoomHeight = roomGenerator.roomSize.y - 2 * wallThickness;
+
+            // Calculate grid dimensions
+            GridWidth = Mathf.RoundToInt(effectiveRoomWidth / cellSize);
+            GridHeight = Mathf.RoundToInt(effectiveRoomHeight / cellSize);
+
+            // Adjust effective room dimensions based on grid size to ensure cells fit perfectly
+            effectiveRoomWidth = GridWidth * cellSize;
+            effectiveRoomHeight = GridHeight * cellSize;
+
+            // Starting position to center the grid within the room
+            float startX = basePosition.x - effectiveRoomWidth / 2f + cellSize / 2f;
+            float startZ = basePosition.z - effectiveRoomHeight / 2f + cellSize / 2f;
 
             cells.Clear();
 
@@ -31,14 +46,14 @@ namespace Room.Grid
             {
                 for (int x = 0; x < GridWidth; x++)
                 {
-                    Vector3 position = basePosition + new Vector3(
-                        x * cellSize - roomGenerator.roomSize.x / 2f + cellSize / 2f,
+                    Vector3 position = new Vector3(
+                        startX + x * cellSize,
                         0,
-                        z * cellSize - roomGenerator.roomSize.y / 2f + cellSize / 2f
+                        startZ + z * cellSize
                     );
 
-                    CellTag zone = DetermineZone(position);
-                    CellSideTag side = DetermineSide(position);
+                    CellTag zone = DetermineZone(x, z);
+                    CellSideTag side = DetermineSide(x, z);
 
                     cells.Add(new Cell(position, zone, side));
                 }
@@ -47,43 +62,49 @@ namespace Room.Grid
             Debug.Log($"Created grid with {cells.Count} cells.");
         }
 
-        private CellTag DetermineZone(Vector3 position)
+        private CellTag DetermineZone(int xIndex, int zIndex)
         {
-            float innerMargin = cellSize;
-            float halfWidth = roomGenerator.roomSize.x / 2f;
-            float halfHeight = roomGenerator.roomSize.y / 2f;
-
-            bool isInner = position.x > -halfWidth + innerMargin && position.x < halfWidth - innerMargin &&
-                           position.z > -halfHeight + innerMargin && position.z < halfHeight - innerMargin;
-
-            return isInner ? CellTag.Inner : CellTag.Outer;
-        }
-
-        private CellSideTag DetermineSide(Vector3 position)
-        {
-            float xRelative = position.x - transform.position.x;
-            float zRelative = position.z - transform.position.z;
-
-            if (Mathf.Abs(xRelative) > Mathf.Abs(zRelative))
+            // Cells at the edges are considered outer cells
+            if (xIndex == 0 || xIndex == GridWidth - 1 || zIndex == 0 || zIndex == GridHeight - 1)
             {
-                return xRelative > 0 ? CellSideTag.East : CellSideTag.West;
+                return CellTag.Outer;
             }
             else
             {
-                return zRelative > 0 ? CellSideTag.North : CellSideTag.South;
+                return CellTag.Inner;
             }
+        }
+
+        private CellSideTag DetermineSide(int xIndex, int zIndex)
+        {
+            if (zIndex == GridHeight - 1)
+                return CellSideTag.North;
+            else if (zIndex == 0)
+                return CellSideTag.South;
+            else if (xIndex == GridWidth - 1)
+                return CellSideTag.East;
+            else if (xIndex == 0)
+                return CellSideTag.West;
+            else
+                return CellSideTag.Center;
         }
 
         public int GetCellIndexX(float xPosition)
         {
-            float halfWidth = roomGenerator.roomSize.x / 2f;
-            return Mathf.FloorToInt((xPosition + halfWidth - cellSize / 2f) / cellSize);
+            float halfWidth = (roomGenerator.roomSize.x - 2 * wallThickness) / 2f;
+            float startX = transform.position.x - halfWidth;
+
+            int xIndex = Mathf.RoundToInt((xPosition - startX) / cellSize - 0.5f);
+            return xIndex;
         }
 
         public int GetCellIndexZ(float zPosition)
         {
-            float halfHeight = roomGenerator.roomSize.y / 2f;
-            return Mathf.FloorToInt((zPosition + halfHeight - cellSize / 2f) / cellSize);
+            float halfHeight = (roomGenerator.roomSize.y - 2 * wallThickness) / 2f;
+            float startZ = transform.position.z - halfHeight;
+
+            int zIndex = Mathf.RoundToInt((zPosition - startZ) / cellSize - 0.5f);
+            return zIndex;
         }
 
         public Cell GetCellAt(int xIndex, int zIndex)
@@ -103,6 +124,10 @@ namespace Room.Grid
                 {
                     Gizmos.color = Color.red; // Occupied cells are red
                 }
+                else if (cell.ReservedFor != DecorationType.None)
+                {
+                    Gizmos.color = Color.blue; // Reserved cells are blue
+                }
                 else
                 {
                     Gizmos.color = cell.Zone == CellTag.Inner ? Color.green : Color.yellow; // Inner unoccupied cells are green, outer are yellow
@@ -111,5 +136,6 @@ namespace Room.Grid
                 Gizmos.DrawWireCube(cell.Position, new Vector3(cellSize, 0.1f, cellSize));
             }
         }
+
     }
 }
