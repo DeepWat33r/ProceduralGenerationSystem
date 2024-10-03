@@ -314,7 +314,7 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 7256483346805395594, guid: b032e1208a86c2542b02435fd8fafdc3, type: 3}
   m_PrefabInstance: {fileID: 1370366645}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1327369228
+--- !u!114 &1327369234
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -323,29 +323,28 @@ MonoBehaviour:
   m_GameObject: {fileID: 1327369227}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e49825d944741ce41af65d02a3926662, type: 3}
+  m_Script: {fileID: 11500000, guid: a6b67d5b980606f4c9c1319d9a997438, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   decorationAssets:
-  - {fileID: 11400000, guid: b216d07079a715a47a550e92d1a0f126, type: 2}
   - {fileID: 11400000, guid: 77a31aeaeb80f4a459bbeb38b745d428, type: 2}
   - {fileID: 11400000, guid: 04c0bc8f07d7f924491f0c664914ade9, type: 2}
   - {fileID: 11400000, guid: d7895d1683495d14fb9396b0b041b16b, type: 2}
-  - {fileID: 11400000, guid: bfbe702b7677256489c3b07d8df8fcd8, type: 2}
   - {fileID: 11400000, guid: e5db87fb2ef297a43a1831178639f65a, type: 2}
   - {fileID: 11400000, guid: 9795ee82576fac94f86c0b997dfd403f, type: 2}
   - {fileID: 11400000, guid: c89afbbea68977540884e2976a46a28b, type: 2}
   - {fileID: 11400000, guid: df9a77114280916479333a392b6c9b56, type: 2}
-  - {fileID: 11400000, guid: 728fc98a7b2d039478e92d60d8f83d40, type: 2}
   - {fileID: 11400000, guid: 3119f4f0219d59d4f8a1390f80827e68, type: 2}
+  - {fileID: 11400000, guid: 728fc98a7b2d039478e92d60d8f83d40, type: 2}
   - {fileID: 11400000, guid: 1443a38eea1595a49a37ea0cdd3ce230, type: 2}
+  - {fileID: 11400000, guid: 029b54bfb752db844b5c2d82335d485f, type: 2}
   - {fileID: 11400000, guid: 56d461493c12d1b4fa095d2cf976cbb7, type: 2}
   - {fileID: 11400000, guid: d01ec9dda1bfe04499077fe8793c787f, type: 2}
   - {fileID: 11400000, guid: 4c2caddf9fd857e4d8d1beecdda36055, type: 2}
   - {fileID: 11400000, guid: 9c26ad5b419aff44b9b4fe239a7149a7, type: 2}
   - {fileID: 11400000, guid: 63d8ba142fb40e74782e50e289e56d5d, type: 2}
   randomSeed: 12345
-  decorationDensity: 0.2
+  decorationDensity: 0.3
 --- !u!1001 &1370366645
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -356,6 +355,10 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 94800079009975140, guid: b032e1208a86c2542b02435fd8fafdc3, type: 3}
       propertyPath: cellSize
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 94800079009975140, guid: b032e1208a86c2542b02435fd8fafdc3, type: 3}
+      propertyPath: WallThickness
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 94800079009975140, guid: b032e1208a86c2542b02435fd8fafdc3, type: 3}
@@ -416,7 +419,7 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 7256483346805395594, guid: b032e1208a86c2542b02435fd8fafdc3, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1327369228}
+      addedObject: {fileID: 1327369234}
   m_SourcePrefab: {fileID: 100100000, guid: b032e1208a86c2542b02435fd8fafdc3, type: 3}
 --- !u!1 &1920720367
 GameObject:
