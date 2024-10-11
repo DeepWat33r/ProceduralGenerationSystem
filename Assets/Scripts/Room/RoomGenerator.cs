@@ -18,7 +18,7 @@ namespace Room
 
         void Start()
         {
-            GetComponents();
+            //GetComponents();
             GenerateRoom();
             previousRoomSize = roomSize;
         }
@@ -32,8 +32,9 @@ namespace Room
             }
         }
 
-        private void GenerateRoom()
+        public void GenerateRoom()
         {
+            GetComponents();
             walls.GenerateWalls(roomSize);
             floor.GenerateFloor(roomSize);
             //ceiling.GenerateCeiling(roomSize);

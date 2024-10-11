@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 857323067783227945}
   - component: {fileID: 7722169447252049767}
   - component: {fileID: 7747264408977970773}
-  - component: {fileID: 1308930113781981091}
+  - component: {fileID: 6744685792185787930}
   m_Layer: 0
   m_Name: floor_dirt_small_D
   m_TagString: Untagged
@@ -84,7 +84,7 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &1308930113781981091
+--- !u!65 &6744685792185787930
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -103,5 +103,5 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 2, y: 0.15, z: 2}
-  m_Center: {x: 0, y: -0.025, z: 0}
+  m_Size: {x: 0.5, y: 0.03, z: 0.5}
+  m_Center: {x: 0, y: -0.01, z: 0}

@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 8974660737083579241}
   - component: {fileID: 6672407747721771453}
   - component: {fileID: 94800079009975140}
+  - component: {fileID: 2347774265573794531}
   m_Layer: 0
   m_Name: RoomGenerator
   m_TagString: Untagged
@@ -48,7 +49,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab2bae4494ec97145947395c00bf0dea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  roomSize: {x: 15, y: 15}
+  roomSize: {x: 30, y: 15}
   randomSeed: 12345
   walls: {fileID: 8794088093104863482}
   floor: {fileID: 8974660737083579241}
@@ -146,23 +147,36 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 34be48a8b28f0704ebff1a7fedcd61c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cellSize: 1
+  cellSize: 0.25
+  wallThickness: 0.25
+--- !u!114 &2347774265573794531
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7256483346805395594}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a6b67d5b980606f4c9c1319d9a997438, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
   decorationAssets:
-  - {fileID: 11400000, guid: b216d07079a715a47a550e92d1a0f126, type: 2}
   - {fileID: 11400000, guid: 77a31aeaeb80f4a459bbeb38b745d428, type: 2}
   - {fileID: 11400000, guid: 04c0bc8f07d7f924491f0c664914ade9, type: 2}
   - {fileID: 11400000, guid: d7895d1683495d14fb9396b0b041b16b, type: 2}
-  - {fileID: 11400000, guid: bfbe702b7677256489c3b07d8df8fcd8, type: 2}
   - {fileID: 11400000, guid: e5db87fb2ef297a43a1831178639f65a, type: 2}
   - {fileID: 11400000, guid: 9795ee82576fac94f86c0b997dfd403f, type: 2}
-  - {fileID: 11400000, guid: df9a77114280916479333a392b6c9b56, type: 2}
   - {fileID: 11400000, guid: c89afbbea68977540884e2976a46a28b, type: 2}
+  - {fileID: 11400000, guid: df9a77114280916479333a392b6c9b56, type: 2}
   - {fileID: 11400000, guid: 3119f4f0219d59d4f8a1390f80827e68, type: 2}
   - {fileID: 11400000, guid: 728fc98a7b2d039478e92d60d8f83d40, type: 2}
   - {fileID: 11400000, guid: 1443a38eea1595a49a37ea0cdd3ce230, type: 2}
   - {fileID: 11400000, guid: 029b54bfb752db844b5c2d82335d485f, type: 2}
   - {fileID: 11400000, guid: 56d461493c12d1b4fa095d2cf976cbb7, type: 2}
-  - {fileID: 11400000, guid: 63d8ba142fb40e74782e50e289e56d5d, type: 2}
   - {fileID: 11400000, guid: d01ec9dda1bfe04499077fe8793c787f, type: 2}
   - {fileID: 11400000, guid: 4c2caddf9fd857e4d8d1beecdda36055, type: 2}
   - {fileID: 11400000, guid: 9c26ad5b419aff44b9b4fe239a7149a7, type: 2}
+  - {fileID: 11400000, guid: 63d8ba142fb40e74782e50e289e56d5d, type: 2}
+  randomSeed: 4242477
+  decorationDensity: 0.116

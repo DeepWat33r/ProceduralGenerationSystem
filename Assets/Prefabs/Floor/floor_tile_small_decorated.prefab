@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6629341202684566269}
   - component: {fileID: 9158287862256247575}
   - component: {fileID: 7018507675837696360}
-  - component: {fileID: 4986567090586824924}
+  - component: {fileID: 120135734423696836}
   m_Layer: 0
   m_Name: floor_tile_small_decorated
   m_TagString: Untagged
@@ -84,7 +84,7 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &4986567090586824924
+--- !u!65 &120135734423696836
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -103,5 +103,5 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 2, y: 0.15, z: 2}
-  m_Center: {x: 0, y: -0.025, z: 0}
+  m_Size: {x: 0.5, y: 0.03, z: 0.5}
+  m_Center: {x: 0, y: -0.01, z: 0}

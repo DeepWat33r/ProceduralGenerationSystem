@@ -33,8 +33,8 @@ namespace Room
             Vector3 basePosition = transform.position;
 
             // Calculate number of tiles needed based on room size and tile size (assumed 2x2)
-            int tileCountX = Mathf.CeilToInt(roomSize.x / 2f);
-            int tileCountZ = Mathf.CeilToInt(roomSize.y / 2f);
+            int tileCountX = Mathf.CeilToInt(roomSize.x / 0.5f);
+            int tileCountZ = Mathf.CeilToInt(roomSize.y / 0.5f);
 
             // Randomly select one of the four floor types
             FloorType selectedFloorType = GetRandomFloorType();
@@ -119,7 +119,7 @@ namespace Room
 
             Vector3 meshSize = meshFilter.sharedMesh.bounds.size;
             Vector3 prefabScale = floorTile.transform.localScale;
-
+            
             // Adjust mesh size according to the prefab's local scale
             Vector3 scaledMeshSize = Vector3.Scale(meshSize, prefabScale);
 

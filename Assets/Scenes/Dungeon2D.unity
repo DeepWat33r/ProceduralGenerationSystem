@@ -133,6 +133,7 @@ GameObject:
   m_Component:
   - component: {fileID: 203877985}
   - component: {fileID: 203877984}
+  - component: {fileID: 203877986}
   m_Layer: 0
   m_Name: Generator
   m_TagString: Untagged
@@ -152,10 +153,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0763b230d22fd334bbc9441aed267b70, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  size: {x: 100, y: 100}
+  size: {x: 50, y: 50}
   roomCount: 50
-  roomMinSize: {x: 5, y: 5}
-  roomMaxSize: {x: 30, y: 30}
+  roomMinSize: {x: 3, y: 3}
+  roomMaxSize: {x: 10, y: 10}
   cubePrefab: {fileID: 7415050535990569633, guid: 3338c8a5a466c074f9088d27b2aa3f10, type: 3}
   redMaterial: {fileID: 2100000, guid: 166f88880ab57fd4a8e60bf33dad4b9c, type: 2}
   blueMaterial: {fileID: 2100000, guid: dedc540ac2c129b4caf167bd0029fee4, type: 2}
@@ -174,6 +175,20 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &203877986
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 203877983}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc9534f8223fcaf448587ee3683a09b8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  roomPrefab: {fileID: 7256483346805395594, guid: b032e1208a86c2542b02435fd8fafdc3, type: 3}
+  roomCubeMaterial: {fileID: 2100000, guid: 166f88880ab57fd4a8e60bf33dad4b9c, type: 2}
 --- !u!1 &1061073680
 GameObject:
   m_ObjectHideFlags: 0

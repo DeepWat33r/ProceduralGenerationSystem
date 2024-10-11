@@ -201,7 +201,7 @@ namespace Room.Grid
             {
                 // Get adjacent cells
                 List<Cell> adjacentCells = GetAdjacentCells(cell);
-                Debug.Log($"Table at ({cell.Position.x}, {cell.Position.z}) has {adjacentCells.Count} adjacent cells.");
+                //Debug.Log($"Table at ({cell.Position.x}, {cell.Position.z}) has {adjacentCells.Count} adjacent cells.");
                 foreach (var adjacentCell in adjacentCells)
                 {
                     if (!adjacentCell.IsOccupied && adjacentCell.ReservedFor == DecorationType.None)
@@ -209,15 +209,15 @@ namespace Room.Grid
                         adjacentCell.ReservedFor = reservationType;
                         adjacentCell.ReservedBy = cell; // Keep track of the table cell that reserved it
                         reservationsMade++;
-                        Debug.Log($"Reserved cell at ({adjacentCell.Position.x}, {adjacentCell.Position.z}) for {reservationType}.");
+                        //Debug.Log($"Reserved cell at ({adjacentCell.Position.x}, {adjacentCell.Position.z}) for {reservationType}.");
                     }
                     else
                     {
-                        Debug.Log($"Cannot reserve cell at ({adjacentCell.Position.x}, {adjacentCell.Position.z}) - Occupied: {adjacentCell.IsOccupied}, ReservedFor: {adjacentCell.ReservedFor}");
+                        //Debug.Log($"Cannot reserve cell at ({adjacentCell.Position.x}, {adjacentCell.Position.z}) - Occupied: {adjacentCell.IsOccupied}, ReservedFor: {adjacentCell.ReservedFor}");
                     }
                 }
             }
-            Debug.Log($"Reserved {reservationsMade} cells for {reservationType}.");
+            //Debug.Log($"Reserved {reservationsMade} cells for {reservationType}.");
         }
 
         private List<Cell> GetAdjacentCells(Cell cell)
@@ -242,7 +242,7 @@ namespace Room.Grid
                 }
                 else
                 {
-                    Debug.Log($"Adjacent cell at index ({adjacentX}, {adjacentZ}) is out of bounds.");
+                    //Debug.Log($"Adjacent cell at index ({adjacentX}, {adjacentZ}) is out of bounds.");
                 }
             }
 
@@ -263,7 +263,7 @@ namespace Room.Grid
 
                     if (possibleDecorations.Count == 0)
                     {
-                        Debug.LogWarning("No chair decorations found to place.");
+                        //Debug.LogWarning("No chair decorations found to place.");
                         continue;
                     }
 
@@ -281,7 +281,7 @@ namespace Room.Grid
                     cell.ReservedBy = null;
                 }
             }
-            Debug.Log($"Attempted to place chairs at {chairPlacementAttempts} reserved cells.");
+            //Debug.Log($"Attempted to place chairs at {chairPlacementAttempts} reserved cells.");
         }
 
 
@@ -312,7 +312,7 @@ namespace Room.Grid
         {
             if (cellsCovered == null || cellsCovered.Count == 0)
             {
-                Debug.LogError("Cannot calculate decoration position: cellsCovered is null or empty.");
+                //Debug.LogError("Cannot calculate decoration position: cellsCovered is null or empty.");
                 return Vector3.zero;
             }
             Vector3 sumPosition = Vector3.zero;

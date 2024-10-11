@@ -59,7 +59,7 @@ namespace Room.Grid
                 }
             }
 
-            Debug.Log($"Created grid with {cells.Count} cells.");
+            //Debug.Log($"Created grid with {cells.Count} cells.");
         }
 
         private CellTag DetermineZone(int xIndex, int zIndex)
@@ -114,28 +114,27 @@ namespace Room.Grid
             return cells[zIndex * GridWidth + xIndex];
         }
 
-        private void OnDrawGizmos()
-        {
-            if (cells == null || cells.Count == 0) return;
-
-            foreach (var cell in cells)
-            {
-                if (cell.IsOccupied)
-                {
-                    Gizmos.color = Color.red; // Occupied cells are red
-                }
-                else if (cell.ReservedFor != DecorationType.None)
-                {
-                    Gizmos.color = Color.blue; // Reserved cells are blue
-                }
-                else
-                {
-                    Gizmos.color = cell.Zone == CellTag.Inner ? Color.green : Color.yellow; // Inner unoccupied cells are green, outer are yellow
-                }
-
-                Gizmos.DrawWireCube(cell.Position, new Vector3(cellSize, 0.1f, cellSize));
-            }
-        }
-
+        // private void OnDrawGizmos()
+        // {
+        //     if (cells == null || cells.Count == 0) return;
+        //
+        //     foreach (var cell in cells)
+        //     {
+        //         if (cell.IsOccupied)
+        //         {
+        //             Gizmos.color = Color.red; // Occupied cells are red
+        //         }
+        //         else if (cell.ReservedFor != DecorationType.None)
+        //         {
+        //             Gizmos.color = Color.blue; // Reserved cells are blue
+        //         }
+        //         else
+        //         {
+        //             Gizmos.color = cell.Zone == CellTag.Inner ? Color.green : Color.yellow; // Inner unoccupied cells are green, outer are yellow
+        //         }
+        //
+        //         Gizmos.DrawWireCube(cell.Position, new Vector3(cellSize, 0.1f, cellSize));
+        //     }
+        // }
     }
 }

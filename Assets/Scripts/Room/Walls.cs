@@ -4,7 +4,7 @@ using Random = System.Random;
 
 namespace Room
 {
-[System.Serializable]
+    [System.Serializable]
     public class WallType
     {
         public GameObject wallPrefab; // The wall prefab
@@ -22,6 +22,13 @@ namespace Room
         // Method to generate walls and pillars based on room size
         public void GenerateWalls(Vector2 roomSize)
         {
+            // Null check for pillar prefab
+            if (pillarPrefab == null) 
+            {
+                Debug.LogError("Pillar prefab is not assigned.");
+                return;
+            }
+
             // Clear existing walls and pillars if any
             foreach (Transform child in transform)
                 Destroy(child.gameObject);
@@ -53,14 +60,25 @@ namespace Room
             CreatePillar(basePosition + new Vector3(-roomSize.x / 2 + scaledPillarMeshSize.x / 2, 0, -roomSize.y / 2 + scaledPillarMeshSize.z / 2), pillarPrefabScale);
             CreatePillar(basePosition + new Vector3(roomSize.x / 2 - scaledPillarMeshSize.x / 2, 0, -roomSize.y / 2 + scaledPillarMeshSize.z / 2), pillarPrefabScale);
         }
-
+    
         // Helper method to create individual walls with random modules and optional rotation
         private void CreateWall(Vector3 basePosition, Vector3 direction, float length, float additionalRotation = 0f, bool rotate = false)
         {
             // Get the Mesh size from the default wall prefab for reference
             WallType referenceWallType = GetRandomWallType();
+            if (referenceWallType == null) 
+            {
+                Debug.LogError("Reference WallType is null.");
+                return;
+            }
+
             MeshFilter referenceMeshFilter = referenceWallType.wallPrefab.GetComponentInChildren<MeshFilter>();
-            
+            if (referenceMeshFilter == null) 
+            {
+                Debug.LogError("Wall prefab does not have a MeshFilter component.");
+                return;
+            }
+
             Vector3 wallMeshSize = referenceMeshFilter.sharedMesh.bounds.size; // Get the size of the wall mesh
             Vector3 wallPrefabScale = referenceWallType.wallPrefab.transform.localScale; // Get the scale of the wall prefab
             Vector3 scaledWallMeshSize = Vector3.Scale(wallMeshSize, wallPrefabScale); // Adjust mesh size according to the prefab's local scale
@@ -72,7 +90,11 @@ namespace Room
             {
                 // Randomly select a wall type for each module
                 WallType selectedWallType = GetRandomWallType();
-                if (selectedWallType == null) continue;
+                if (selectedWallType == null)
+                {
+                    Debug.LogError("Selected WallType is null.");
+                    continue;
+                }
 
                 // Calculate the position for each wall module
                 Vector3 position = basePosition + direction * (-length / 2 + scaledWallMeshSize.x * scale / 2 + i * scale * scaledWallMeshSize.x);
@@ -86,15 +108,18 @@ namespace Room
 
                 // Apply scaling to the wall module
                 wall.transform.localScale = new Vector3(scale * wallPrefabScale.x, wallPrefabScale.y, wallPrefabScale.z);
-
-                // Log the position, size, and scale to debug
-                //Debug.Log($"Wall Position: {position}, Scaled Mesh Size: {scaledWallMeshSize}, Scale: {scale}, Rotated: {rotate}, Additional Rotation: {additionalRotation}");
             }
         }
 
         // Helper method to create individual pillars
         private void CreatePillar(Vector3 position, Vector3 prefabScale)
         {
+            if (pillarPrefab == null)
+            {
+                Debug.LogError("Pillar prefab is null.");
+                return;
+            }
+
             // Instantiate the pillar prefab at the specified position
             GameObject pillar = Instantiate(pillarPrefab, position, Quaternion.identity, transform);
 
@@ -105,22 +130,52 @@ namespace Room
         // Method to select a wall type based on weighted chances using seeded randomness
         private WallType GetRandomWallType()
         {
-            if (wallTypes == null || wallTypes.Count == 0) { Debug.LogError("No wall types available for selection."); return null; }
+            if (wallTypes == null || wallTypes.Count == 0)
+            {
+                Debug.LogError("No wall types available for selection.");
+                return null;
+            }
 
             float totalChance = 0f;
             foreach (var wallType in wallTypes)
+            {
+                if (wallType.wallPrefab == null)
+                {
+                    Debug.LogError($"WallType entry has a null wallPrefab. Check your inspector assignments for WallType at index {wallTypes.IndexOf(wallType)}.");
+                    continue;
+                }
                 totalChance += wallType.spawnChance;
+            }
 
-            float randomValue = (float)_random.NextDouble() * totalChance; // Use System.Random for seeded randomness
+            if (totalChance == 0f)
+            {
+                Debug.LogError("Total spawn chance is zero. Check that your wall types have non-zero spawn chances.");
+                return null;
+            }
+
+            float randomValue = (float)_random.NextDouble() * totalChance; 
             float cumulativeChance = 0f;
 
             foreach (var wallType in wallTypes)
             {
+                if (wallType.wallPrefab == null)
+                {
+                    Debug.LogError($"Skipping WallType with null prefab at index {wallTypes.IndexOf(wallType)}.");
+                    continue;
+                }
+
                 cumulativeChance += wallType.spawnChance;
-                if (randomValue < cumulativeChance) return wallType;
+                if (randomValue < cumulativeChance)
+                {
+                    Debug.Log($"Selected WallType: {wallType.wallPrefab.name} with spawn chance {wallType.spawnChance} on first wall placement.");
+                    return wallType;
+                }
             }
 
-            return null; // Fallback, though this should not happen
+            Debug.LogError("Failed to select a wall type on first wall placement.");
+            return null;
         }
+
+
     }
 }
