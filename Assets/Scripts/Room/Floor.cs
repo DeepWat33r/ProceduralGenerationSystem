@@ -101,13 +101,19 @@ namespace Room
         // Helper method to align the floor tile by its lowest point
         private void AlignFloorTile(GameObject floorTile)
         {
-            Renderer renderer = floorTile.GetComponentInChildren<Renderer>();
-            if (renderer != null)
-            {
-                // Calculate the adjustment needed based on the lowest point of the bounding box
-                float lowestPoint = renderer.bounds.min.y;
-                floorTile.transform.position -= new Vector3(0, lowestPoint, 0);
-            }
+            // Get the parent room's Y position (assuming the room is the parent)
+            float roomYPosition = transform.position.y; // Or floorTile.transform.parent.position.y if nested
+
+            // Get the current Y position of the floor tile
+            float currentYPosition = floorTile.transform.position.y;
+
+            // Adjust the Y position of the floor tile to align with the room's Y position
+            float adjustment = roomYPosition - currentYPosition;
+
+            // Apply the adjustment to align the floor tile with the room's Y position
+            floorTile.transform.position += new Vector3(0, adjustment, 0);
+
+            //Debug.Log($"Aligned floor tile. Room Y: {roomYPosition}, Tile Y: {currentYPosition}, Adjustment: {adjustment}");
         }
 
         // Helper method to scale the floor tile to fit the room perfectly

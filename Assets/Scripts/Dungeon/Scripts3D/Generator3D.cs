@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using Dungeon.Scripts2D;
 using UnityEngine;
 using Random = System.Random;
 using Graphs;
@@ -32,6 +33,8 @@ public class Generator3D : MonoBehaviour {
     [SerializeField]
     int roomCount;
     [SerializeField]
+    Vector3Int roomMinSize;
+    [SerializeField]
     Vector3Int roomMaxSize;
     [SerializeField]
     GameObject cubePrefab;
@@ -47,8 +50,18 @@ public class Generator3D : MonoBehaviour {
     List<Room> rooms;
     Delaunay3D delaunay;
     HashSet<Prim.Edge> selectedEdges;
-
+    private RoomReplacer _roomReplacer;
     void Start() {
+        // Initialize the RoomReplacer component
+        _roomReplacer = GetComponent<RoomReplacer>();
+
+        // Run the dungeon generation process synchronously
+        Generate();
+
+        // After generating, replace cubes with rooms
+        _roomReplacer.ReplaceCubesWithRooms();
+    }   
+    private void Generate() {
         random = new Random((int)DateTime.Now.Ticks);  // Seed based on current time
         grid = new Grid3D<CellType>(size, Vector3Int.zero);
         rooms = new List<Room>();
@@ -58,7 +71,6 @@ public class Generator3D : MonoBehaviour {
         CreateHallways();
         PathfindHallways();
     }
-
     void PlaceRooms() {
         for (int i = 0; i < roomCount; i++) {
             Vector3Int location = new Vector3Int(
@@ -68,9 +80,9 @@ public class Generator3D : MonoBehaviour {
             );
 
             Vector3Int roomSize = new Vector3Int(
-                random.Next(1, roomMaxSize.x + 1),
-                random.Next(1, roomMaxSize.y + 1),
-                random.Next(1, roomMaxSize.z + 1)
+                random.Next(roomMinSize.x, roomMaxSize.x + 1),
+                random.Next(roomMinSize.y, roomMaxSize.y + 1),
+                random.Next(roomMinSize.z, roomMaxSize.z + 1)
             );
 
             bool add = true;

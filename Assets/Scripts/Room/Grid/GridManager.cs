@@ -39,6 +39,9 @@ namespace Room.Grid
             // Starting position to center the grid within the room
             float startX = basePosition.x - effectiveRoomWidth / 2f + cellSize / 2f;
             float startZ = basePosition.z - effectiveRoomHeight / 2f + cellSize / 2f;
+    
+            // Get the room's Y position to align the grid's Y coordinate
+            float gridYPosition = basePosition.y;  // Use room's Y position here
 
             cells.Clear();
 
@@ -48,7 +51,7 @@ namespace Room.Grid
                 {
                     Vector3 position = new Vector3(
                         startX + x * cellSize,
-                        0,
+                        gridYPosition,  // Use room's Y position instead of hardcoding 0
                         startZ + z * cellSize
                     );
 
@@ -61,6 +64,7 @@ namespace Room.Grid
 
             //Debug.Log($"Created grid with {cells.Count} cells.");
         }
+
 
         private CellTag DetermineZone(int xIndex, int zIndex)
         {
