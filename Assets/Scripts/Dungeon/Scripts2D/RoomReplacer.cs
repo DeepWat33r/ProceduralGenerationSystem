@@ -5,10 +5,7 @@ namespace Dungeon.Scripts2D
 {
     public class RoomReplacer : MonoBehaviour
     {
-        [SerializeField] private GameObject roomPrefab;  // Room prefab with RoomGenerator
-        [SerializeField] private Material roomCubeMaterial; // Material used to identify room cubes
-
-        public void ReplaceCubesWithRooms()
+        public void ReplaceCubesWithRooms(GameObject roomPrefab, Material roomCubeMaterial)
         {
             //Debug.Log("Starting ReplaceCubesWithRooms");  // Debug the start of the process
 
@@ -69,24 +66,45 @@ namespace Dungeon.Scripts2D
                                 Destroy(cube);
                                 //Debug.Log("Cube destroyed.");
                             }
-                            else
-                            {
-                                //Debug.LogError("RoomGenerator component is missing on the room prefab.");
-                            }
-                        }
-                        else
-                        {
-                            //Debug.LogError("Failed to instantiate roomPrefab as GameObject.");
                         }
                     }
                 }
-                else
+            }
+        }
+        public void ReplaceCubesWithHallways(GameObject hallwayPrefab, Material hallwayCubeMaterial)
+        {
+            // Find all cubes in the scene
+            GameObject[] allCubes = GameObject.FindGameObjectsWithTag("Cube");
+
+            foreach (GameObject cube in allCubes)
+            {
+                // Check if the cube has the material we are looking for
+                MeshRenderer meshRenderer = cube.GetComponent<MeshRenderer>();
+
+                if (meshRenderer != null && meshRenderer.sharedMaterial == hallwayCubeMaterial)
                 {
-                    //Debug.LogError($"Cube at {cube.transform.position} does not have a MeshRenderer component.");
+                    // Cube is identified as a hallway cube based on the material
+                    Vector3 cubePosition = cube.transform.position;
+                    Vector3 cubeScale = cube.transform.localScale;
+
+                    // Instantiate the hallway prefab at the cube's position
+                    GameObject hallwayObject = Instantiate(hallwayPrefab, cubePosition, Quaternion.identity);
+
+                    if (hallwayObject != null)
+                    {
+                        // Center the hallway to the cube's center (since the cube’s center is offset)
+                        Vector3 adjustedPosition = new Vector3(
+                            cubePosition.x + (cubeScale.x / 2f),  // Adjust for X center
+                            cubePosition.y,                      // Keep Y position the same
+                            cubePosition.z + (cubeScale.z / 2f)   // Adjust for Z center
+                        );
+                        hallwayObject.transform.position = adjustedPosition;
+
+                        // Destroy the cube after replacing it with the hallway
+                        Destroy(cube);
+                    }
                 }
             }
-
-            //Debug.Log("Finished ReplaceCubesWithRooms");
         }
     }
 }

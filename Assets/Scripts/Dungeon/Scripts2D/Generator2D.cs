@@ -49,6 +49,9 @@ namespace Dungeon.Scripts2D
         Delaunay2D delaunay;
         HashSet<Prim.Edge> selectedEdges;
         private RoomReplacer _roomReplacer;
+        
+        [SerializeField] private GameObject roomPrefab;
+        [SerializeField] private GameObject hallwayPrefab;  
 
         void Start() {
             // Initialize the RoomReplacer component
@@ -58,7 +61,8 @@ namespace Dungeon.Scripts2D
             Generate();
 
             // After generating, replace cubes with rooms
-            _roomReplacer.ReplaceCubesWithRooms();
+            _roomReplacer.ReplaceCubesWithRooms(roomPrefab, redMaterial);
+            _roomReplacer.ReplaceCubesWithHallways(hallwayPrefab, blueMaterial);
         }
 
         void Generate() {

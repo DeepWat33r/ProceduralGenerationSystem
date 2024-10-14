@@ -411,6 +411,8 @@ MonoBehaviour:
   redMaterial: {fileID: 2100000, guid: 166f88880ab57fd4a8e60bf33dad4b9c, type: 2}
   blueMaterial: {fileID: 2100000, guid: dedc540ac2c129b4caf167bd0029fee4, type: 2}
   greenMaterial: {fileID: 2100000, guid: 0f99b2e8709b2b743a903b609c1d009a, type: 2}
+  roomPrefab: {fileID: 7256483346805395594, guid: b032e1208a86c2542b02435fd8fafdc3, type: 3}
+  hallwayPrefab: {fileID: 159399697242250318, guid: ead9eb80c4c468f40b62d2f7cfd73ea3, type: 3}
 --- !u!4 &1180316802
 Transform:
   m_ObjectHideFlags: 0
@@ -438,8 +440,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc9534f8223fcaf448587ee3683a09b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  roomPrefab: {fileID: 7256483346805395594, guid: b032e1208a86c2542b02435fd8fafdc3, type: 3}
-  roomCubeMaterial: {fileID: 2100000, guid: 166f88880ab57fd4a8e60bf33dad4b9c, type: 2}
 --- !u!1 &1515053883
 GameObject:
   m_ObjectHideFlags: 0

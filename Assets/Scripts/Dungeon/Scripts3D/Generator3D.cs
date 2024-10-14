@@ -51,6 +51,9 @@ public class Generator3D : MonoBehaviour {
     Delaunay3D delaunay;
     HashSet<Prim.Edge> selectedEdges;
     private RoomReplacer _roomReplacer;
+    
+    [SerializeField] private GameObject roomPrefab;
+    [SerializeField] private GameObject hallwayPrefab; 
     void Start() {
         // Initialize the RoomReplacer component
         _roomReplacer = GetComponent<RoomReplacer>();
@@ -59,7 +62,8 @@ public class Generator3D : MonoBehaviour {
         Generate();
 
         // After generating, replace cubes with rooms
-        _roomReplacer.ReplaceCubesWithRooms();
+        _roomReplacer.ReplaceCubesWithRooms(roomPrefab, redMaterial);
+        _roomReplacer.ReplaceCubesWithHallways(hallwayPrefab, blueMaterial);
     }   
     private void Generate() {
         random = new Random((int)DateTime.Now.Ticks);  // Seed based on current time
