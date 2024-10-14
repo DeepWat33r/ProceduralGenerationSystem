@@ -49,7 +49,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab2bae4494ec97145947395c00bf0dea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  roomSize: {x: 30, y: 15}
+  roomSize: {x: 1, y: 1}
   randomSeed: 12345
   walls: {fileID: 8794088093104863482}
   floor: {fileID: 8974660737083579241}

@@ -33,32 +33,20 @@ namespace Room
             foreach (Transform child in transform)
                 Destroy(child.gameObject);
 
-            // Get the Mesh size from the pillar prefab
-            MeshFilter pillarMeshFilter = pillarPrefab.GetComponentInChildren<MeshFilter>();
-            if (pillarMeshFilter == null) { Debug.LogError("Pillar prefab does not have a MeshFilter component."); return; }
-
-            Vector3 pillarMeshSize = pillarMeshFilter.sharedMesh.bounds.size; // Get the size of the pillar mesh
-            Vector3 pillarPrefabScale = pillarPrefab.transform.localScale; // Get the scale of the pillar prefab
-            Vector3 scaledPillarMeshSize = Vector3.Scale(pillarMeshSize, pillarPrefabScale); // Adjust pillar size according to the prefab's local scale
-
-            // Calculate the adjusted room size by subtracting the pillar size from the walls' lengths
-            float adjustedRoomWidth = roomSize.x - scaledPillarMeshSize.x;
-            float adjustedRoomHeight = roomSize.y - scaledPillarMeshSize.z;
-
             // Use the parent GameObject's position as the base position
             Vector3 basePosition = transform.position;
 
-            // Create walls at specified positions with adjusted lengths
-            CreateWall(basePosition + new Vector3(0, 0, roomSize.y / 2 - scaledPillarMeshSize.z / 2), Vector3.right, adjustedRoomWidth, 180f); // North wall
-            CreateWall(basePosition + new Vector3(0, 0, -roomSize.y / 2 + scaledPillarMeshSize.z / 2), Vector3.right, adjustedRoomWidth); // South wall
-            CreateWall(basePosition + new Vector3(-roomSize.x / 2 + scaledPillarMeshSize.z / 2, 0, 0), Vector3.forward, adjustedRoomHeight, 0f, true); // West wall
-            CreateWall(basePosition + new Vector3(roomSize.x / 2 - scaledPillarMeshSize.z / 2, 0, 0), Vector3.forward, adjustedRoomHeight, 180f, true); // East wall
+            // Create walls at specified positions with adjusted lengths (on the edges of the room)
+            CreateWall(basePosition + new Vector3(0, 0, roomSize.y / 2), Vector3.right, roomSize.x, 180f); // North wall
+            CreateWall(basePosition + new Vector3(0, 0, -roomSize.y / 2), Vector3.right, roomSize.x); // South wall
+            CreateWall(basePosition + new Vector3(-roomSize.x / 2, 0, 0), Vector3.forward, roomSize.y, 0f, true); // West wall
+            CreateWall(basePosition + new Vector3(roomSize.x / 2, 0, 0), Vector3.forward, roomSize.y, 180f, true); // East wall
 
-            // Create pillars at the corners of the room
-            CreatePillar(basePosition + new Vector3(-roomSize.x / 2 + scaledPillarMeshSize.x / 2, 0, roomSize.y / 2 - scaledPillarMeshSize.z / 2), pillarPrefabScale);
-            CreatePillar(basePosition + new Vector3(roomSize.x / 2 - scaledPillarMeshSize.x / 2, 0, roomSize.y / 2 - scaledPillarMeshSize.z / 2), pillarPrefabScale);
-            CreatePillar(basePosition + new Vector3(-roomSize.x / 2 + scaledPillarMeshSize.x / 2, 0, -roomSize.y / 2 + scaledPillarMeshSize.z / 2), pillarPrefabScale);
-            CreatePillar(basePosition + new Vector3(roomSize.x / 2 - scaledPillarMeshSize.x / 2, 0, -roomSize.y / 2 + scaledPillarMeshSize.z / 2), pillarPrefabScale);
+            // Create pillars at the corners of the room (aligned with the edges)
+            CreatePillar(basePosition + new Vector3(roomSize.x / 2, 0, roomSize.y / 2), pillarPrefab.transform.localScale);
+            CreatePillar(basePosition + new Vector3(-roomSize.x / 2, 0, roomSize.y / 2), pillarPrefab.transform.localScale);
+            CreatePillar(basePosition + new Vector3(roomSize.x / 2, 0, -roomSize.y / 2), pillarPrefab.transform.localScale);
+            CreatePillar(basePosition + new Vector3(-roomSize.x / 2, 0, -roomSize.y / 2), pillarPrefab.transform.localScale);
         }
     
         // Helper method to create individual walls with random modules and optional rotation

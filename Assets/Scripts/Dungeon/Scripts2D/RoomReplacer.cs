@@ -10,11 +10,11 @@ namespace Dungeon.Scripts2D
 
         public void ReplaceCubesWithRooms()
         {
-            Debug.Log("Starting ReplaceCubesWithRooms");  // Debug the start of the process
+            //Debug.Log("Starting ReplaceCubesWithRooms");  // Debug the start of the process
 
             // Find all cubes in the scene
             GameObject[] allCubes = GameObject.FindGameObjectsWithTag("Cube");
-            Debug.Log($"Found {allCubes.Length} cubes in the scene.");
+            //Debug.Log($"Found {allCubes.Length} cubes in the scene.");
 
             foreach (GameObject cube in allCubes)
             {
@@ -23,11 +23,11 @@ namespace Dungeon.Scripts2D
 
                 if (meshRenderer != null)
                 {
-                    Debug.Log($"Cube at position {cube.transform.position} has material {meshRenderer.sharedMaterial.name}");
+                    //Debug.Log($"Cube at position {cube.transform.position} has material {meshRenderer.sharedMaterial.name}");
 
                     if (meshRenderer.sharedMaterial == roomCubeMaterial)
                     {
-                        Debug.Log($"Identified cube for replacement at {cube.transform.position}");
+                        //Debug.Log($"Identified cube for replacement at {cube.transform.position}");
 
                         // Cube is identified as a room cube based on the material
                         Vector3 cubePosition = cube.transform.position;
@@ -38,7 +38,7 @@ namespace Dungeon.Scripts2D
 
                         if (roomObject != null)
                         {
-                            Debug.Log("Room prefab instantiated successfully.");
+                            //Debug.Log("Room prefab instantiated successfully.");
 
                             RoomGenerator roomGenerator = roomObject.GetComponent<RoomGenerator>();
 
@@ -47,14 +47,14 @@ namespace Dungeon.Scripts2D
                                 // Adjust room size according to the cube's size (4x cube size)
                                 Vector2 adjustedRoomSize = new Vector2(cubeScale.x , cubeScale.z );
                                 roomGenerator.roomSize = adjustedRoomSize;
-                                Debug.Log($"Room size set to {adjustedRoomSize}");
+                                //Debug.Log($"Room size set to {adjustedRoomSize}");
 
                                 roomGenerator.GenerateRoom();
-                                Debug.Log("Room generation called.");
+                                //Debug.Log("Room generation called.");
 
                                 // Scale the room to 0.25
                                 //roomObject.transform.localScale = new Vector3(0.25f, 0.25f, 0.25f);
-                                Debug.Log("Room scaled to 0.25.");
+                                //Debug.Log("Room scaled to 0.25.");
 
                                 // Adjust position (centered room adjustment)
                                 Vector3 adjustedPosition = new Vector3(
@@ -63,30 +63,30 @@ namespace Dungeon.Scripts2D
                                     cubePosition.z + (adjustedRoomSize.y / 2f)
                                 );
                                 roomObject.transform.position = adjustedPosition;
-                                Debug.Log($"Room position set to {adjustedPosition}");
+                                //Debug.Log($"Room position set to {adjustedPosition}");
 
                                 // Destroy the cube after replacing it with the room
                                 Destroy(cube);
-                                Debug.Log("Cube destroyed.");
+                                //Debug.Log("Cube destroyed.");
                             }
                             else
                             {
-                                Debug.LogError("RoomGenerator component is missing on the room prefab.");
+                                //Debug.LogError("RoomGenerator component is missing on the room prefab.");
                             }
                         }
                         else
                         {
-                            Debug.LogError("Failed to instantiate roomPrefab as GameObject.");
+                            //Debug.LogError("Failed to instantiate roomPrefab as GameObject.");
                         }
                     }
                 }
                 else
                 {
-                    Debug.LogError($"Cube at {cube.transform.position} does not have a MeshRenderer component.");
+                    //Debug.LogError($"Cube at {cube.transform.position} does not have a MeshRenderer component.");
                 }
             }
 
-            Debug.Log("Finished ReplaceCubesWithRooms");
+            //Debug.Log("Finished ReplaceCubesWithRooms");
         }
     }
 }
