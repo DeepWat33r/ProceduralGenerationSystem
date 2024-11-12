@@ -28,7 +28,7 @@ namespace Room
             Vector2 tileSize = new Vector2(roomSize.x / tileCountX, roomSize.y / tileCountZ);
 
             // Set the ceiling height above the room (you can adjust this value as needed)
-            float ceilingHeight = GetWallHeight(); 
+            float ceilingHeight = GetWallHeight()-0.1f; 
 
             // Generate the ceiling tiles
             for (int x = 0; x < tileCountX; x++)

@@ -13,9 +13,10 @@ GameObject:
   - component: {fileID: 6588140112478638902}
   - component: {fileID: 1173150905707892486}
   - component: {fileID: 5713149426538661598}
-  m_Layer: 0
+  - component: {fileID: 4813146414774005714}
+  m_Layer: 7
   m_Name: HallwayGenerator
-  m_TagString: Untagged
+  m_TagString: Hallway
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -47,7 +48,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c701b5627d4beb94c8f1c883dc9a0254, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  roomSize: {x: 1, y: 1}
+  hallwaySize: {x: 1, y: 1}
   randomSeed: 12345
   walls: {fileID: 6588140112478638902}
   floor: {fileID: 1173150905707892486}
@@ -113,3 +114,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ceilingPrefab: {fileID: 1100984533900727109, guid: 267ab7c473f81814c922525a5ac20d16, type: 3}
   wallsScript: {fileID: 6588140112478638902}
+--- !u!114 &4813146414774005714
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 159399697242250318}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 79a5853cc33b5bc47bf821e6bfa56f8c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

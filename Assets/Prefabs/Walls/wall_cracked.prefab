@@ -12,9 +12,9 @@ GameObject:
   - component: {fileID: 3200830510361803658}
   - component: {fileID: 8048150508419109888}
   - component: {fileID: 2710394941396000027}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: wall_cracked
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

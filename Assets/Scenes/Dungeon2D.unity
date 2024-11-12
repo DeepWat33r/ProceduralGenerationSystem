@@ -162,6 +162,10 @@ MonoBehaviour:
   blueMaterial: {fileID: 2100000, guid: dedc540ac2c129b4caf167bd0029fee4, type: 2}
   roomPrefab: {fileID: 7256483346805395594, guid: b032e1208a86c2542b02435fd8fafdc3, type: 3}
   hallwayPrefab: {fileID: 159399697242250318, guid: ead9eb80c4c468f40b62d2f7cfd73ea3, type: 3}
+  roomColor: {r: 0, g: 1, b: 0, a: 1}
+  hallwayColor: {r: 0, g: 0, b: 1, a: 1}
+  emptyColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  showGrid: 0
 --- !u!4 &203877985
 Transform:
   m_ObjectHideFlags: 0

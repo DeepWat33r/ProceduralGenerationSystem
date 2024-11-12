@@ -12,9 +12,9 @@ GameObject:
   - component: {fileID: 2394741933428992837}
   - component: {fileID: 6237490243372919527}
   - component: {fileID: 7497981597028451051}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: wall_shelves
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

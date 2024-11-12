@@ -11,6 +11,7 @@ namespace Hallway
         [SerializeField] private Walls walls;
         [SerializeField] private Floor floor;
         [SerializeField] private Ceiling ceiling;
+        //[SerializeField] private HallwayScanner hallwayScanner;
         
         void Start()
         {
@@ -22,9 +23,14 @@ namespace Hallway
             GetComponents();
             walls.GenerateWalls(hallwaySize);
             floor.GenerateFloor(hallwaySize);
-            //ceiling.GenerateCeiling(roomSize);
+            //ceiling.GenerateCeiling(hallwaySize);
+            Physics.SyncTransforms();
+            //hallwayScanner.ScanForAdjacentHallwaysOrRooms(gameObject);
         }
-
+        // public void HallwayCheck()
+        // {
+        //     hallwayScanner.ScanForAdjacentHallwaysOrRooms(gameObject);
+        // }
         private void GetComponents()
         {
             walls = GetComponent<Walls>();
@@ -37,6 +43,9 @@ namespace Hallway
 
             ceiling = GetComponent<Ceiling>();
             if (ceiling == null) Debug.LogError("Ceiling component is missing on the GameObject.");
+            
+            // hallwayScanner = GetComponent<HallwayScanner>();
+            // if (hallwayScanner == null) Debug.LogError("HallwayScanner component is missing on the GameObject.");
         }
     }
 }

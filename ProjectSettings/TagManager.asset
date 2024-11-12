@@ -8,6 +8,11 @@ TagManager:
   - Room
   - Hallway
   - Stairs
+  - Wall
+  - Wall_North
+  - Wall_East
+  - Wall_South
+  - Wall_West
   layers:
   - Default
   - TransparentFX
@@ -15,9 +20,9 @@ TagManager:
   - 
   - Water
   - UI
-  - 
-  - 
-  - 
+  - Room
+  - Hallway
+  - Wall
   - 
   - 
   - 
