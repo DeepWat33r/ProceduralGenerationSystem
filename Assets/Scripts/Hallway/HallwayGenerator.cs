@@ -22,7 +22,7 @@ namespace Hallway
             GetComponents();
             walls.GenerateWalls(hallwaySize);
             floor.GenerateFloor(hallwaySize);
-            ceiling.GenerateCeiling(hallwaySize);
+            //ceiling.GenerateCeiling(hallwaySize);
         }
         private void GetComponents()
         {

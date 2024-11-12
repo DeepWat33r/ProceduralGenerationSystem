@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 1173150905707892486}
   - component: {fileID: 5713149426538661598}
   - component: {fileID: 4813146414774005714}
+  - component: {fileID: -7509286982301164324}
   m_Layer: 7
   m_Name: HallwayGenerator
   m_TagString: Hallway
@@ -124,5 +125,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 79a5853cc33b5bc47bf821e6bfa56f8c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &-7509286982301164324
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 159399697242250318}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1d202da606ef4ac42b64442e307a447d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
