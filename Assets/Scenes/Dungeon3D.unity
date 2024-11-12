@@ -412,6 +412,7 @@ MonoBehaviour:
   greenMaterial: {fileID: 2100000, guid: 0f99b2e8709b2b743a903b609c1d009a, type: 2}
   roomPrefab: {fileID: 7256483346805395594, guid: b032e1208a86c2542b02435fd8fafdc3, type: 3}
   hallwayPrefab: {fileID: 159399697242250318, guid: ead9eb80c4c468f40b62d2f7cfd73ea3, type: 3}
+  stairsPrefab: {fileID: 9119398073710610801, guid: 0b8621abef3b4914c9ff857e393d9a36, type: 3}
   roomColor: {r: 0, g: 1, b: 0, a: 1}
   hallwayColor: {r: 0, g: 0, b: 1, a: 1}
   stairsColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}

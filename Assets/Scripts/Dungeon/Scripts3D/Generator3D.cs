@@ -58,6 +58,7 @@ namespace Dungeon.Scripts3D
     
         [SerializeField] private GameObject roomPrefab;
         [SerializeField] private GameObject hallwayPrefab; 
+        [SerializeField] private GameObject stairsPrefab; 
         void Start() {
             
             // Run the dungeon generation process synchronously
@@ -235,10 +236,7 @@ namespace Dungeon.Scripts3D
                                 grid[prev + verticalOffset + horizontalOffset] = CellType.Stairs;
                                 grid[prev + verticalOffset + horizontalOffset * 2] = CellType.Stairs;
 
-                                PlaceStairs(prev + horizontalOffset);
-                                PlaceStairs(prev + horizontalOffset * 2);
-                                PlaceStairs(prev + verticalOffset + horizontalOffset);
-                                PlaceStairs(prev + verticalOffset + horizontalOffset * 2);
+                                PlaceStairs(prev+horizontalOffset, delta, horizontalOffset);
                             }
 
                             //Debug.DrawLine(prev + new Vector3(0.5f, 0.5f, 0.5f), current + new Vector3(0.5f, 0.5f, 0.5f), Color.blue, 100, false);
@@ -334,9 +332,39 @@ namespace Dungeon.Scripts3D
                 }
             }
         }
+        
+        void PlaceStairs(Vector3Int location, Vector3Int delta, Vector3Int horizontalOffset)
+        {
+            // Adjust the y-coordinate based on delta to handle up and down placement
+            int adjustedY = delta.y > 0 ? location.y : location.y - 1;
 
-        void PlaceStairs(Vector3Int location) {
-            PlaceCube(location, new Vector3Int(1, 1, 1), greenMaterial);
+            // Calculate the position to match the former 4-cube configuration
+            Vector3 stairPosition = new Vector3(
+                location.x + horizontalOffset.x * 0.5f + 0.5f,
+                adjustedY,
+                location.z + horizontalOffset.z * 0.5f + 0.5f
+            );
+
+            // Determine the rotation based on the direction of horizontalOffset
+            Quaternion stairRotation = Quaternion.identity;
+    
+            if (horizontalOffset.x == 1) 
+                stairRotation = Quaternion.Euler(0, delta.y > 0 ? -90 : 90, 0); // East-facing
+            else if (horizontalOffset.x == -1) 
+                stairRotation = Quaternion.Euler(0, delta.y > 0 ? 90 : -90, 0); // West-facing
+            else if (horizontalOffset.z == 1) 
+                stairRotation = Quaternion.Euler(0, delta.y > 0 ? -180 : 0, 0); // North-facing
+            else if (horizontalOffset.z == -1) 
+                stairRotation = Quaternion.Euler(0, delta.y > 0 ? 0 : 180, 0); // South-facing
+
+            // Instantiate the stair prefab with the calculated position and rotation
+            Instantiate(stairsPrefab, stairPosition, stairRotation, transform);
         }
+
+
+
+
+
+
     }
 }
