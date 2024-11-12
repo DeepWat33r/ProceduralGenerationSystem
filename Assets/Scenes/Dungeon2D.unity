@@ -154,9 +154,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   size: {x: 50, y: 50}
-  roomCount: 50
+  roomCount: 80
   roomMinSize: {x: 3, y: 3}
-  roomMaxSize: {x: 10, y: 10}
+  roomMaxSize: {x: 8, y: 8}
   cubePrefab: {fileID: 7415050535990569633, guid: 3338c8a5a466c074f9088d27b2aa3f10, type: 3}
   redMaterial: {fileID: 2100000, guid: 166f88880ab57fd4a8e60bf33dad4b9c, type: 2}
   blueMaterial: {fileID: 2100000, guid: dedc540ac2c129b4caf167bd0029fee4, type: 2}

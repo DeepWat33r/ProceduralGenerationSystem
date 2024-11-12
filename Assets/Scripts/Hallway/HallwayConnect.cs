@@ -63,7 +63,7 @@ namespace Hallway
             if (wall != null)
             {
                 Destroy(wall.gameObject);
-                Debug.Log($"Destroyed {wallTag} on hallway at {gridPosition}");
+                //Debug.Log($"Destroyed {wallTag} on hallway at {gridPosition}");
             }
             else
             {

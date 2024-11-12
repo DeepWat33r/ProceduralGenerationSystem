@@ -46,7 +46,8 @@ namespace Dungeon.Scripts2D
         Random random;
         Grid2D<CellType> grid;
         List<Room> rooms;
-        Dictionary<Vector2Int, GameObject> hallways;
+        Dictionary<Vector2Int, GameObject> hallwaysDictionary;
+        Dictionary<Vector2Int, GameObject> roomsDictionary;
         Delaunay2D delaunay;
         HashSet<Prim.Edge> selectedEdges;
 
@@ -57,6 +58,7 @@ namespace Dungeon.Scripts2D
         {
             Generate();
             InitializeAllHallways();
+            InitializeAllRooms();
         }
 
         void Generate()
@@ -64,8 +66,9 @@ namespace Dungeon.Scripts2D
             random = new Random((int)DateTime.Now.Ticks);
             grid = new Grid2D<CellType>(size, Vector2Int.zero);
             rooms = new List<Room>();
-            hallways = new Dictionary<Vector2Int, GameObject>();
-
+            hallwaysDictionary = new Dictionary<Vector2Int, GameObject>();
+            roomsDictionary = new Dictionary<Vector2Int, GameObject>();
+            
             PlaceRooms();
             Triangulate();
             CreateHallways();
@@ -199,26 +202,44 @@ namespace Dungeon.Scripts2D
         
         void PlaceRoom(Vector2Int location, Vector2Int size)
         {
-            Vector3 cubePosition = new Vector3(location.x, 0, location.y);
-            GameObject roomObject = Instantiate(roomPrefab, cubePosition, Quaternion.identity);
+            Vector3 roomPosition = new Vector3(location.x, 0, location.y);
+            GameObject roomObject = Instantiate(roomPrefab, roomPosition, Quaternion.identity);
 
             if (roomObject != null)
             {
+                // Get the RoomGenerator component from the instantiated room object
                 RoomGenerator roomGenerator = roomObject.GetComponent<RoomGenerator>();
 
                 if (roomGenerator != null)
                 {
+                    // Set the room size directly on the RoomGenerator component
                     Vector2 adjustedRoomSize = new Vector2(size.x, size.y);
                     roomGenerator.roomSize = adjustedRoomSize;
 
+                    // Generate the room contents based on the specified size
                     roomGenerator.GenerateRoom();
 
+                    // Adjust the room position to center it within the grid cell based on its size
                     Vector3 adjustedPosition = new Vector3(
-                        cubePosition.x + (adjustedRoomSize.x / 2f),
-                        cubePosition.y,
-                        cubePosition.z + (adjustedRoomSize.y / 2f)
+                        roomPosition.x + (adjustedRoomSize.x / 2f),
+                        roomPosition.y,
+                        roomPosition.z + (adjustedRoomSize.y / 2f)
                     );
                     roomObject.transform.position = adjustedPosition;
+
+                    // Add the room to the dictionary for later reference
+                    roomsDictionary.Add(location, roomObject);
+                }
+            }
+        }
+        void InitializeAllRooms()
+        {
+            foreach (var kvp in roomsDictionary)
+            {
+                var roomComponent = kvp.Value.GetComponent<RoomConnect>(); // Assuming RoomConnect is the equivalent component for rooms
+                if (roomComponent != null)
+                {
+                    roomComponent.Initialize(grid); // Initialize each room with its grid position
                 }
             }
         }
@@ -226,12 +247,12 @@ namespace Dungeon.Scripts2D
         void PlaceHallway(Vector2Int location)
         {
             GameObject hallwayObj = Instantiate(hallwayPrefab, new Vector3(location.x + 0.5f, 0, location.y + 0.5f), Quaternion.identity);
-            hallways.Add(location, hallwayObj);
+            hallwaysDictionary.Add(location, hallwayObj);
         }
 
         void InitializeAllHallways()
         {
-            foreach (var kvp in hallways)
+            foreach (var kvp in hallwaysDictionary)
             {
                 var hallwayComponent = kvp.Value.GetComponent<HallwayConnect>();
                 if (hallwayComponent != null)

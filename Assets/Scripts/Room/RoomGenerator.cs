@@ -37,7 +37,7 @@ namespace Room
             GetComponents();
             walls.GenerateWalls(roomSize);
             floor.GenerateFloor(roomSize);
-            //ceiling.GenerateCeiling(roomSize);
+            ceiling.GenerateCeiling(roomSize);
 
             gridManager.CreateGrid();
 

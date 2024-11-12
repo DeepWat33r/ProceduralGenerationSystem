@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 6672407747721771453}
   - component: {fileID: 94800079009975140}
   - component: {fileID: 2347774265573794531}
+  - component: {fileID: 997623410210417487}
   m_Layer: 6
   m_Name: RoomGenerator
   m_TagString: Room
@@ -180,3 +181,16 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 63d8ba142fb40e74782e50e289e56d5d, type: 2}
   randomSeed: 4242477
   decorationDensity: 0.116
+--- !u!114 &997623410210417487
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7256483346805395594}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9472e556c9c95e64b805069fa104e920, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  doorPrefab: {fileID: 8539962268447586346, guid: 0cec4fe4f04d0434e8d466db7e68056a, type: 3}
