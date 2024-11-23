@@ -1,0 +1,323 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="NameAndType">
+  <Class Name="DecorationAsset" Collapsed="true">
+    <Position X="13.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAIAQAABAAAAAAAAAEIQAAAAAAAAAAAAAAAAAAE=</HashCode>
+      <FileName>Assets\Scripts\DecorationAsset.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BlueRaja.FastPriorityQueue&lt;T&gt;" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="15" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IABAABQQAQAAARQAAAAARAQAAAAABAAEAiAIAAFQCAA=</HashCode>
+      <FileName>Assets\Scripts\Dungeon\BlueRaja\FastPriorityQueue.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="BlueRaja.FastPriorityQueueNode" Collapsed="true">
+    <Position X="7.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAEAAAAAAAAQAAAEAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Dungeon\BlueRaja\FastPriorityQueueNode.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BlueRaja.GenericPriorityQueue&lt;TItem, TPriority&gt;" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="15" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IABAABQQAQAAARQAAAAARBQAAgAABAAEAiAIAAFQAAA=</HashCode>
+      <FileName>Assets\Scripts\Dungeon\BlueRaja\GenericPriorityQueue.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="BlueRaja.GenericPriorityQueueNode&lt;TPriority&gt;" Collapsed="true">
+    <Position X="16.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABAAAAAAAAAAAAAEAAAAAAAAQAAAEAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Dungeon\BlueRaja\GenericPriorityQueueNode.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BlueRaja.SimplePriorityQueue&lt;TItem, TPriority&gt;" Collapsed="true">
+    <Position X="4.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIBABCABAABBARUAEQQARAQAAAAABAAEAIAAAABQEAA=</HashCode>
+      <FileName>Assets\Scripts\Dungeon\BlueRaja\SimplePriorityQueue.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="BlueRaja.SimplePriorityQueue&lt;TItem&gt;" Collapsed="true">
+    <Position X="4.25" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Dungeon\BlueRaja\SimplePriorityQueue.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BlueRaja.StablePriorityQueue&lt;T&gt;" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="18.5" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IABAABQQAQAAARQAAAAARAQAAgAABAAEAiAIAAFQAAA=</HashCode>
+      <FileName>Assets\Scripts\Dungeon\BlueRaja\StablePriorityQueue.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="BlueRaja.StablePriorityQueueNode" Collapsed="true">
+    <Position X="7.25" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Dungeon\BlueRaja\StablePriorityQueueNode.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Graphs.Vertex" Collapsed="true">
+    <Position X="4.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAggAAAAAAAAAAAAIAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Dungeon\Graphs.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Graphs.Vertex&lt;T&gt;" Collapsed="true">
+    <Position X="4.25" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Dungeon\Graphs.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Graphs.Edge" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="13.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAgAAAAAAAAAAAAIAAAAAAAAASAiA=</HashCode>
+      <FileName>Assets\Scripts\Dungeon\Graphs.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Dungeon.Prim" Collapsed="true">
+    <Position X="18.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Dungeon\Prim.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Dungeon.Rotator" Collapsed="true">
+    <Position X="15" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAABAACAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Dungeon\Rotator.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Dungeon.Scripts2D.Delaunay2D" Collapsed="true">
+    <Position X="16.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAgAAAAAAAAAABAAAAAAAAAIAAAAAAEEAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Dungeon\Scripts2D\Delaunay2D.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Dungeon.Scripts2D.DungeonPathfinder2D" Collapsed="true">
+    <Position X="9.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAAAAAQAAAIAAAAAAABAAAAAAAAgAIAAAIAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Dungeon\Scripts2D\DungeonPathfinder2D.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Dungeon.Scripts2D.Generator2D" Collapsed="true">
+    <Position X="11.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIAEIAAQACICAAgAgIICAAAAAIBAAgAAIEUASEBBCAE=</HashCode>
+      <FileName>Assets\Scripts\Dungeon\Scripts2D\Generator2D.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Dungeon.Scripts2D.Grid2D&lt;T&gt;" Collapsed="true">
+    <Position X="18.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAEAAAAAAAAAgAAQCAAAAAAAAAAAAAAAAAAQAAAAgAA=</HashCode>
+      <FileName>Assets\Scripts\Dungeon\Scripts2D\Grid2D.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Dungeon.Scripts3D.Delaunay3D" Collapsed="true">
+    <Position X="18.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAgAAAAAAAAAABAAAAAAAAAIAAAAAAEEAAAAEAAAA=</HashCode>
+      <FileName>Assets\Scripts\Dungeon\Scripts3D\Delaunay3D.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Dungeon.Scripts3D.DungeonPathfinder3D" Collapsed="true">
+    <Position X="11.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAAAAAQAAAIAAAAAAABAAAAAAAAgAIAAAIAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Dungeon\Scripts3D\DungeonPathfinder3D.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Dungeon.Scripts3D.Generator3D" Collapsed="true">
+    <Position X="15" Y="5.5" Width="3.75" />
+    <NestedTypes>
+      <Enum Name="Dungeon.Scripts3D.Generator3D.CellType" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Assets\Scripts\Dungeon\Scripts3D\Generator3D.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+      <Class Name="Dungeon.Scripts3D.Generator3D.Room" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Assets\Scripts\Dungeon\Scripts3D\Generator3D.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Class>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AIAEIAAQACICAAgAgIICAAQAAIBAAgAAIEWATMBBCAE=</HashCode>
+      <FileName>Assets\Scripts\Dungeon\Scripts3D\Generator3D.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Dungeon.Scripts3D.Grid3D&lt;T&gt;" Collapsed="true">
+    <Position X="9.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAEAAAAAAAAAgAAQCAAAAAAAAAAAAAAAAAAQAAAAgAA=</HashCode>
+      <FileName>Assets\Scripts\Dungeon\Scripts3D\Grid3D.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Hallway.HallwayConnect" Collapsed="true">
+    <Position X="13.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAABAIAAQAAAAAAACABAAAAAEAAAACAAAAAAIA=</HashCode>
+      <FileName>Assets\Scripts\Hallway\HallwayConnect.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Hallway.HallwayConnect3D" Collapsed="true">
+    <Position X="15" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAABAIAAQAAAAAAACABAAAAAEAAAACAAAAAAIA=</HashCode>
+      <FileName>Assets\Scripts\Hallway\HallwayConnect3D.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Hallway.HallwayGenerator" Collapsed="true">
+    <Position X="16.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QABAAAAAACgAAAACAAAIAAAgAAAAAAAAAIAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Hallway\HallwayGenerator.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Room.Ceiling" Collapsed="true">
+    <Position X="9.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAQAQAAAAAAAAIAAAAAAAAAAAAAAAAAAACAAAAE=</HashCode>
+      <FileName>Assets\Scripts\Room\Ceiling.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Room.FloorPrefab" Collapsed="true">
+    <Position X="18.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAgAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Room\Floor.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Room.FloorType" Collapsed="true">
+    <Position X="9.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgQAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Room\Floor.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Room.Floor" Collapsed="true">
+    <Position X="16.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CAAAAABAAIAAAAAAgAAAAAAAAAAQAAQIAAAAAAAAAAE=</HashCode>
+      <FileName>Assets\Scripts\Room\Floor.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Room.RoomConnect" Collapsed="true">
+    <Position X="9.75" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAIAAQAgAAAAACABAgABAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Room\RoomConnect.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Room.RoomConnect3D" Collapsed="true">
+    <Position X="11.5" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAIAAQAgAAAAACABAgABAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Room\RoomConnect3D.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Room.RoomGenerator" Collapsed="true">
+    <Position X="13.25" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QARAAAABACAAABAAABAIBAAgAAAAAAAEAIAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Room\RoomGenerator.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Room.WallType">
+    <Position X="11.5" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAIAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Room\Walls.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Room.Walls" Collapsed="true">
+    <Position X="9.75" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAACBAAAAAAAAEAACEAAAAAAAAAAAAAAAAAAAIAAE=</HashCode>
+      <FileName>Assets\Scripts\Room\Walls.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Room.Grid.Cell" Collapsed="true">
+    <Position X="11.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAABAAgAAgABAAAgAAAAAAABAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Room\Grid\Cell.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Room.Grid.DecorationManager" Collapsed="true">
+    <Position X="15" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAhAAABCAAAAACEgIIAABAAAgAABAgAAAAQAAABiAEA=</HashCode>
+      <FileName>Assets\Scripts\Room\Grid\DecorationManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Room.Grid.GridManager" Collapsed="true">
+    <Position X="11.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAEABAAAAAAIAQhICAgAAAAgAQAAIAQAAAEA=</HashCode>
+      <FileName>Assets\Scripts\Room\Grid\GridManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Room.ObjectSpawners.Spawner" Collapsed="true">
+    <Position X="16.75" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Room\ObjectSpawners\ISpawner.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Interface Name="BlueRaja.IFixedSizePriorityQueue&lt;TItem, TPriority&gt;" Collapsed="true">
+    <Position X="7.25" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAIAAEAAAA=</HashCode>
+      <FileName>Assets\Scripts\Dungeon\BlueRaja\IFixedSizePriorityQueue.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="BlueRaja.IPriorityQueue&lt;TItem, TPriority&gt;" Collapsed="true">
+    <Position X="7.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AABAAAAAAAAAAQQAAAAABAQAAAAABAAAAAAAAABQAAA=</HashCode>
+      <FileName>Assets\Scripts\Dungeon\BlueRaja\IPriorityQueue.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Enum Name="Room.Grid.CellTag" Collapsed="true">
+    <Position X="11.5" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Room\Grid\Cell.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Room.Grid.CellSideTag" Collapsed="true">
+    <Position X="9.75" Y="6.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAJAAQ=</HashCode>
+      <FileName>Assets\Scripts\Room\Grid\Cell.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Room.Grid.DecorationType" Collapsed="true">
+    <Position X="13.25" Y="6.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAQAACAAAAQAAAAAIAAAAAAAAAAAEAAAA=</HashCode>
+      <FileName>Assets\Scripts\Room\Grid\DecorationType.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

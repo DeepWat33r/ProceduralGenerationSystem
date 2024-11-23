@@ -194,7 +194,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9472e556c9c95e64b805069fa104e920, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  doorPrefab: {fileID: 8539962268447586346, guid: 0cec4fe4f04d0434e8d466db7e68056a, type: 3}
+  doorPrefab: {fileID: 5344010812082251652, guid: ab97f3382f05a03449f29ea43e3cab68, type: 3}
 --- !u!114 &-4997565514449653715
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -207,4 +207,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff515b8b67ec374448c4eb2017564333, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  doorPrefab: {fileID: 8539962268447586346, guid: 0cec4fe4f04d0434e8d466db7e68056a, type: 3}
+  doorPrefab: {fileID: 5344010812082251652, guid: ab97f3382f05a03449f29ea43e3cab68, type: 3}

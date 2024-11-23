@@ -1,18 +1,19 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class Rotator : MonoBehaviour {
-    [SerializeField]
-    float rotateSpeed;
+namespace Dungeon
+{
+    public class Rotator : MonoBehaviour {
+        [SerializeField]
+        float rotateSpeed;
 
-    new Transform transform;
+        new Transform transform;
 
-    void Start() {
-        transform = GetComponent<Transform>();
-    }
+        void Start() {
+            transform = GetComponent<Transform>();
+        }
 
-    void Update() {
-        transform.Rotate(0, rotateSpeed * Time.deltaTime, 0);
+        void Update() {
+            transform.Rotate(0, rotateSpeed * Time.deltaTime, 0);
+        }
     }
 }

@@ -11,8 +11,8 @@ namespace Room.Grid
         public CellTag Zone;
         public CellSideTag Side;
         public bool IsOccupied;
-        public DecorationType ReservedFor; // New property
-        public Cell ReservedBy;            // New property
+        public DecorationType ReservedFor; 
+        public Cell ReservedBy;           
 
         public Cell(Vector3 position, CellTag zone, CellSideTag side)
         {
@@ -20,8 +20,8 @@ namespace Room.Grid
             Zone = zone;
             Side = side;
             IsOccupied = false;
-            ReservedFor = DecorationType.None; // Initialize as None
-            ReservedBy = null;                 // Initialize as null
+            ReservedFor = DecorationType.None;
+            ReservedBy = null;                 
         }
     }
 }

@@ -9,25 +9,23 @@ namespace Room
     {
         private Grid3D<Generator3D.CellType> grid;
 
-        [SerializeField] private GameObject doorPrefab;  // Door prefab to replace removed walls
+        [SerializeField] private GameObject doorPrefab;  
 
         public void Initialize(Grid3D<Generator3D.CellType> grid)
         {
             this.grid = grid;
 
-            // Process wall removal based on adjacent hallways
             StartCoroutine(DelayedRemoveWalls());
         }
 
         private IEnumerator DelayedRemoveWalls()
         {
-            yield return null; // Wait for one frame to ensure all children are recognized
+            yield return null; 
             CheckAndRemoveWalls();
         }
 
         private void CheckAndRemoveWalls()
         {
-            // Check walls on each side: North, South, East, and West (no Up and Down in this case)
             TryRemoveWallsOnSide("Wall_North", Vector3Int.forward);    // North
             TryRemoveWallsOnSide("Wall_South", Vector3Int.back);       // South
             TryRemoveWallsOnSide("Wall_East", Vector3Int.right);       // East
@@ -36,7 +34,6 @@ namespace Room
 
         private void TryRemoveWallsOnSide(string wallTag, Vector3Int direction)
         {
-            // Collect all walls on this side
             List<GameObject> wallsOnSide = new List<GameObject>();
             foreach (Transform child in transform)
             {
@@ -53,10 +50,9 @@ namespace Room
                 Vector3Int wallGridPosition = GetGridPosition(wall.transform.position, direction);
                 Vector3Int adjacentPosition = wallGridPosition + direction;
 
-                // Check both the grid boundary and that it’s a hallway at the current Y level
                 if (grid.InBounds(adjacentPosition) && grid[adjacentPosition] == Generator3D.CellType.Hallway)
                 {
-                    removableWalls.Add(wall); // Add wall to the list of removable walls
+                    removableWalls.Add(wall); 
                 }
             }
 
@@ -70,7 +66,6 @@ namespace Room
 
                 Destroy(wallToRemove); // Remove the wall
 
-                // Instantiate the door at the wall's position and rotation
                 if (doorPrefab != null)
                 {
                     Instantiate(doorPrefab, wallPosition, wallRotation, transform);
@@ -80,12 +75,11 @@ namespace Room
 
         private Vector3Int GetGridPosition(Vector3 worldPosition, Vector3Int direction)
         {
-            // Adjust the wall position into the room grid cell for precise grid alignment on any floor level
             float offsetAmount = 0.1f;
             Vector3 offsetPosition = worldPosition - new Vector3(direction.x * offsetAmount, 0, direction.z * offsetAmount);
 
             int x = Mathf.FloorToInt(offsetPosition.x);
-            int y = Mathf.FloorToInt(offsetPosition.y);  // Includes Y for height level
+            int y = Mathf.FloorToInt(offsetPosition.y); 
             int z = Mathf.FloorToInt(offsetPosition.z);
             return new Vector3Int(x, y, z);
         }

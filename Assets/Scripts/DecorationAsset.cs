@@ -5,14 +5,13 @@ using Room.Grid;
 public class DecorationAsset : ScriptableObject
 {
     public GameObject prefab;
-    public Vector2 area;            // Size of the decoration in cells (width, height)
-    public CellTag zone;            // Zone where this decoration can be placed
-
+    public Vector2 area;          
+    public CellTag zone;           
     [Range(0, 1)]
-    public float chances;           // Chance of this decoration being placed
+    public float chances;          
 
-    public bool hasAssociatedDecorations;           // Does this decoration have associated decorations?
-    public DecorationType associatedDecorationType; // Type of associated decoration
+    public bool hasAssociatedDecorations;          
+    public DecorationType associatedDecorationType; 
 
-    public DecorationType decorationType; // The type of this decoration
+    public DecorationType decorationType; 
 }

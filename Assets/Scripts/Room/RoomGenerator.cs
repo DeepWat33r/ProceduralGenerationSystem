@@ -18,7 +18,6 @@ namespace Room
 
         void Start()
         {
-            //GetComponents();
             GenerateRoom();
             previousRoomSize = roomSize;
         }

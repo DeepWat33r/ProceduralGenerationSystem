@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using Dungeon.Scripts2D;
 using Graphs;
 using Hallway;
 using Room;
@@ -39,14 +38,6 @@ namespace Dungeon.Scripts3D
         Vector3Int roomMinSize;
         [SerializeField]
         Vector3Int roomMaxSize;
-        [SerializeField]
-        GameObject cubePrefab;
-        [SerializeField]
-        Material redMaterial;
-        [SerializeField]
-        Material blueMaterial;
-        [SerializeField]
-        Material greenMaterial;
 
         Random random;
         Grid3D<CellType> grid;
@@ -61,13 +52,12 @@ namespace Dungeon.Scripts3D
         [SerializeField] private GameObject stairsPrefab; 
         void Start() {
             
-            // Run the dungeon generation process synchronously
             Generate();
             InitializeAllHallways();
             InitializeAllRooms();
         }   
         private void Generate() {
-            random = new Random((int)DateTime.Now.Ticks);  // Seed based on current time
+            random = new Random((int)DateTime.Now.Ticks);  
             grid = new Grid3D<CellType>(size, Vector3Int.zero);
             rooms = new List<Room>();
             hallwaysDictionary = new Dictionary<Vector3Int, GameObject>();
@@ -251,34 +241,23 @@ namespace Dungeon.Scripts3D
                 }
             }
         }
-
-        void PlaceCube(Vector3Int location, Vector3Int size, Material material) {
-            GameObject go = Instantiate(cubePrefab, location, Quaternion.identity);
-            go.GetComponent<Transform>().localScale = size;
-            go.GetComponent<MeshRenderer>().material = material;
-        }
-
+        
         void PlaceRoom(Vector3Int location, Vector3Int size)
         {
-            // Calculate the center position for the room
             Vector3 roomPosition = new Vector3(location.x + size.x / 2f, location.y, location.z + size.z / 2f);
 
-            // Instantiate the room prefab at the calculated position
             GameObject roomObject = Instantiate(roomPrefab, roomPosition, Quaternion.identity);
 
             if (roomObject != null)
             {
-                // Get the RoomGenerator component to set the size and generate contents
                 RoomGenerator roomGenerator = roomObject.GetComponent<RoomGenerator>();
 
                 if (roomGenerator != null)
                 {
                     roomGenerator.roomSize = new Vector2(size.x, size.z);;
 
-                    // Generate the room layout (walls, floors, etc.)
                     roomGenerator.GenerateRoom();
 
-                    // Adjust position based on the calculated center
                     roomObject.transform.position = roomPosition;
                     
                     roomsDictionary.Add(location, roomObject);
@@ -289,28 +268,25 @@ namespace Dungeon.Scripts3D
         {
             foreach (var kvp in roomsDictionary)
             {
-                var roomComponent = kvp.Value.GetComponent<RoomConnect3D>(); // Assuming RoomConnect is the equivalent component for rooms
+                var roomComponent = kvp.Value.GetComponent<RoomConnect3D>(); 
                 if (roomComponent != null)
                 {
-                    roomComponent.Initialize(grid); // Initialize each room with its grid position
+                    roomComponent.Initialize(grid);
                 }
             }
         }
         
         void PlaceHallway(Vector3Int location)
         {
-            // Check if the hallwayPrefab is assigned
             if (hallwayPrefab == null)
             {
                 Debug.LogError("Hallway prefab is not assigned in the Inspector.");
                 return;
             }
-            // Ensure the dictionary is initialized
             if (hallwaysDictionary == null)
             {
                 hallwaysDictionary = new Dictionary<Vector3Int, GameObject>();
             }
-            // Check if the location already has a hallway
             if (!hallwaysDictionary.ContainsKey(location))
             {
                 GameObject hallwayObj = Instantiate(hallwayPrefab, new Vector3(location.x + 0.5f, location.y, location.z + 0.5f), Quaternion.identity);
@@ -322,12 +298,10 @@ namespace Dungeon.Scripts3D
         {
             foreach (var kvp in hallwaysDictionary)
             {
-                // Get the HallwayConnect component from the hallway GameObject
                 var hallwayComponent = kvp.Value.GetComponent<HallwayConnect3D>();
         
                 if (hallwayComponent != null)
                 {
-                    // Initialize the hallway with the 3D grid and its specific 3D grid position
                     hallwayComponent.Initialize(grid, kvp.Key);
                 }
             }
@@ -335,17 +309,14 @@ namespace Dungeon.Scripts3D
         
         void PlaceStairs(Vector3Int location, Vector3Int delta, Vector3Int horizontalOffset)
         {
-            // Adjust the y-coordinate based on delta to handle up and down placement
             int adjustedY = delta.y > 0 ? location.y : location.y - 1;
 
-            // Calculate the position to match the former 4-cube configuration
             Vector3 stairPosition = new Vector3(
                 location.x + horizontalOffset.x * 0.5f + 0.5f,
                 adjustedY,
                 location.z + horizontalOffset.z * 0.5f + 0.5f
             );
 
-            // Determine the rotation based on the direction of horizontalOffset
             Quaternion stairRotation = Quaternion.identity;
     
             if (horizontalOffset.x == 1) 
@@ -357,14 +328,7 @@ namespace Dungeon.Scripts3D
             else if (horizontalOffset.z == -1) 
                 stairRotation = Quaternion.Euler(0, delta.y > 0 ? 0 : 180, 0); // South-facing
 
-            // Instantiate the stair prefab with the calculated position and rotation
             Instantiate(stairsPrefab, stairPosition, stairRotation, transform);
         }
-
-
-
-
-
-
     }
 }

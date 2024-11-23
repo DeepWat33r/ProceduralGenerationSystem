@@ -9,25 +9,23 @@ namespace Room
     {
         private Grid2D<Generator2D.CellType> grid;
     
-        [SerializeField] private GameObject doorPrefab;  // Door prefab to replace removed walls
+        [SerializeField] private GameObject doorPrefab;  
 
         public void Initialize(Grid2D<Generator2D.CellType> grid)
         {
             this.grid = grid;
 
-            // Process wall removal based on adjacent hallways
             StartCoroutine(DelayedRemoveWalls());
         }
 
         private IEnumerator DelayedRemoveWalls()
         {
-            yield return null; // Wait for one frame to ensure all children are recognized
+            yield return null; 
             CheckAndRemoveWalls();
         }
 
         private void CheckAndRemoveWalls()
         {
-            // Check walls on each side: North, South, East, West
             TryRemoveWallsOnSide("Wall_North", Vector2Int.up);    // North
             TryRemoveWallsOnSide("Wall_South", Vector2Int.down);  // South
             TryRemoveWallsOnSide("Wall_East", Vector2Int.right);  // East
@@ -36,7 +34,6 @@ namespace Room
 
         private void TryRemoveWallsOnSide(string wallTag, Vector2Int direction)
         {
-            // Collect all walls on this side
             List<GameObject> wallsOnSide = new List<GameObject>();
             foreach (Transform child in transform)
             {
@@ -55,7 +52,7 @@ namespace Room
 
                 if (grid.InBounds(adjacentPosition) && grid[adjacentPosition] == Generator2D.CellType.Hallway)
                 {
-                    removableWalls.Add(wall); // Add wall to the list of removable walls
+                    removableWalls.Add(wall); 
                 }
             }
 
@@ -67,9 +64,8 @@ namespace Room
                 Vector3 wallPosition = wallToRemove.transform.position;
                 Quaternion wallRotation = wallToRemove.transform.rotation;
 
-                Destroy(wallToRemove); // Remove the wall
+                Destroy(wallToRemove);
 
-                // Instantiate the door at the wall's position and rotation
                 if (doorPrefab != null)
                 {
                     Instantiate(doorPrefab, wallPosition, wallRotation, transform);

@@ -7,7 +7,7 @@ namespace Room.Grid
     public class GridManager : MonoBehaviour
     {
         public float cellSize = 1f;
-        public float wallThickness = 0.5f; // Adjust based on your wall's actual thickness
+        public float wallThickness = 0.5f; 
         private List<Cell> cells = new List<Cell>();
         private RoomGenerator roomGenerator;
 
@@ -24,24 +24,19 @@ namespace Room.Grid
         {
             Vector3 basePosition = transform.position;
 
-            // Effective room dimensions (inside the walls)
             float effectiveRoomWidth = roomGenerator.roomSize.x - 2 * wallThickness;
             float effectiveRoomHeight = roomGenerator.roomSize.y - 2 * wallThickness;
 
-            // Calculate grid dimensions
             GridWidth = Mathf.RoundToInt(effectiveRoomWidth / cellSize);
             GridHeight = Mathf.RoundToInt(effectiveRoomHeight / cellSize);
 
-            // Adjust effective room dimensions based on grid size to ensure cells fit perfectly
             effectiveRoomWidth = GridWidth * cellSize;
             effectiveRoomHeight = GridHeight * cellSize;
 
-            // Starting position to center the grid within the room
             float startX = basePosition.x - effectiveRoomWidth / 2f + cellSize / 2f;
             float startZ = basePosition.z - effectiveRoomHeight / 2f + cellSize / 2f;
     
-            // Get the room's Y position to align the grid's Y coordinate
-            float gridYPosition = basePosition.y;  // Use room's Y position here
+            float gridYPosition = basePosition.y;  
 
             cells.Clear();
 
@@ -51,7 +46,7 @@ namespace Room.Grid
                 {
                     Vector3 position = new Vector3(
                         startX + x * cellSize,
-                        gridYPosition,  // Use room's Y position instead of hardcoding 0
+                        gridYPosition, 
                         startZ + z * cellSize
                     );
 

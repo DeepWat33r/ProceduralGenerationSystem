@@ -39,9 +39,6 @@ namespace Dungeon.Scripts2D
         [SerializeField] int roomCount;
         [SerializeField] Vector2Int roomMinSize;
         [SerializeField] Vector2Int roomMaxSize;
-        [SerializeField] GameObject cubePrefab;
-        [SerializeField] Material redMaterial;
-        [SerializeField] Material blueMaterial;
 
         Random random;
         Grid2D<CellType> grid;
@@ -207,19 +204,15 @@ namespace Dungeon.Scripts2D
 
             if (roomObject != null)
             {
-                // Get the RoomGenerator component from the instantiated room object
                 RoomGenerator roomGenerator = roomObject.GetComponent<RoomGenerator>();
 
                 if (roomGenerator != null)
                 {
-                    // Set the room size directly on the RoomGenerator component
                     Vector2 adjustedRoomSize = new Vector2(size.x, size.y);
                     roomGenerator.roomSize = adjustedRoomSize;
 
-                    // Generate the room contents based on the specified size
                     roomGenerator.GenerateRoom();
 
-                    // Adjust the room position to center it within the grid cell based on its size
                     Vector3 adjustedPosition = new Vector3(
                         roomPosition.x + (adjustedRoomSize.x / 2f),
                         roomPosition.y,
@@ -227,7 +220,6 @@ namespace Dungeon.Scripts2D
                     );
                     roomObject.transform.position = adjustedPosition;
 
-                    // Add the room to the dictionary for later reference
                     roomsDictionary.Add(location, roomObject);
                 }
             }
@@ -236,10 +228,10 @@ namespace Dungeon.Scripts2D
         {
             foreach (var kvp in roomsDictionary)
             {
-                var roomComponent = kvp.Value.GetComponent<RoomConnect>(); // Assuming RoomConnect is the equivalent component for rooms
+                var roomComponent = kvp.Value.GetComponent<RoomConnect>(); 
                 if (roomComponent != null)
                 {
-                    roomComponent.Initialize(grid); // Initialize each room with its grid position
+                    roomComponent.Initialize(grid); 
                 }
             }
         }

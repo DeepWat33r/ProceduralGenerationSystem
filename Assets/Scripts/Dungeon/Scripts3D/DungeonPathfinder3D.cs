@@ -6,7 +6,7 @@ using UnityEngine;
 namespace Dungeon.Scripts3D
 {
     public class DungeonPathfinder3D {
-        //similar to A*, with some modifications specifically for stair cases
+
         public class Node {
             public Vector3Int Position { get; private set; }
             public Node Previous { get; set; }

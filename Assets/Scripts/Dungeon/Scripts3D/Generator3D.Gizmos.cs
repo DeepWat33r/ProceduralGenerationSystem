@@ -6,13 +6,11 @@ namespace Dungeon.Scripts3D
     public partial class Generator3D
     {
         [Header("Grid Settings")]
-        // Gizmo colors for different cell types
         [SerializeField] private Color roomColor = Color.green;
         [SerializeField] private Color hallwayColor = Color.blue;
         [SerializeField] private Color stairsColor = Color.yellow;
         [SerializeField] private Color emptyColor = Color.clear;
 
-        // Enable/disable grid visualization
         public bool showGrid = true;
         private void OnDrawGizmos()
         {
@@ -25,7 +23,6 @@ namespace Dungeon.Scripts3D
             }
         }
 
-        // Helper method to get all cells in the grid
         private Dictionary<Vector3Int, CellType> GetGridCells()
         {
             Dictionary<Vector3Int, CellType> cells = new Dictionary<Vector3Int, CellType>();
@@ -46,7 +43,6 @@ namespace Dungeon.Scripts3D
             return cells;
         }
 
-        // Helper method to draw Gizmo for each cell based on its type
         private void DrawCellGizmo(Vector3 position, CellType cellType)
         {
             switch (cellType)
